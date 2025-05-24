@@ -272,7 +272,7 @@ export default function Home() {
                     className="transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md hover:bg-accent"
                   >
                     <a
-                      href="portfolio/resume.pdf"
+                      href="/portfolio/resume.pdf"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2"
