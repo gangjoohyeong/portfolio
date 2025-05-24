@@ -10,7 +10,7 @@ const nextConfig = {
     unoptimized: true,
   },
   output: "export",
-  basePath: "/gangjoohyeong-portfoilo",
+  basePath: "/portfolio",
 };
 
 export default nextConfig;
