@@ -298,7 +298,7 @@ export default function Home() {
               <ExperienceCard
                 title="연구원"
                 company="(주)와이즈넛"
-                location="경기도 성남시, 서울"
+                location="경기도 성남시"
                 type="AI연구소 AI에이전트랩 통합솔루션팀"
                 period="2023.10 - 현재"
                 description="챗봇, RAG 등 AI 도메인 기반 제품 엔진 및 관리도구 연구 및 개발"
