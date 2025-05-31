@@ -302,7 +302,12 @@ export default function Home() {
                 type="AI연구소 AI에이전트랩 통합솔루션팀"
                 period="2023.10 - 현재"
                 description="챗봇, RAG 등 AI 도메인 기반 제품 엔진 및 관리도구 연구 및 개발"
-                responsibilities={["업데이트 예정", "업데이트 예정"]}
+                responsibilities={[
+                  "LangGraph 기반 RAG 빌더 개발",
+                  "RAG 관리도구 개발",
+                  "챗봇 관리도구 및 엔진 유지보수",
+                  "벡터 검색 모델 학습 관리도구 개발",
+                ]}
               />
             </div>
           </div>
@@ -461,7 +466,7 @@ export default function Home() {
                         부스트캠프 AI Tech 5기 (수료)
                       </CardDescription>
                     </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">2021 - 2023</Badge>
+                    <Badge className="w-fit mt-1 sm:mt-0">2023</Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
