@@ -51,7 +51,10 @@ export default function ProjectCard({
           <Image
             src={imageUrl || "/placeholder.svg"}
             alt={title}
-            fill
+            layout="responsive"
+            width={1}
+            height={2}
+            objectFit="cover"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
@@ -85,7 +88,7 @@ export default function ProjectCard({
                 size="sm"
                 className="transition-all duration-200 hover:bg-primary/10 hover:text-primary font-medium"
               >
-                View Details
+                상세 보기
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[600px]">
@@ -99,7 +102,10 @@ export default function ProjectCard({
                 <Image
                   src={imageUrl || "/placeholder.svg"}
                   alt={title}
-                  fill
+                  layout="responsive"
+                  width={1}
+                  height={2}
+                  objectFit="cover"
                   className="object-cover"
                 />
               </div>
@@ -135,7 +141,7 @@ export default function ProjectCard({
                         className="flex items-center gap-2"
                       >
                         <Globe className="h-4 w-4" />
-                        Live Demo
+                        설명 페이지
                       </Link>
                     </Button>
                   )}

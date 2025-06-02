@@ -324,21 +324,30 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <ProjectCard
-                title="업데이트 예정"
-                period="August 2024"
+                title="RAG 솔루션 (WISE iRAG)"
+                period="2024 - 2025"
                 description="Implementation of team features based on laravel/jetstream using Filament on Laravel 11, implementing team switching features with Livewire and automatic refresh after team changes."
-                technologies={["Laravel 11", "Filament", "Livewire"]}
-                imageUrl="/placeholder.svg?height=300&width=600"
-                githubUrl="https://github.com/holiq/filateam"
+                technologies={[
+                  "LangGraph",
+                  "FastAPI",
+                  "Spring Boot",
+                  "Nuxt.js",
+                  "FastAPI",
+                  "PostgreSQL",
+                  "GitLab CI",
+                  "Docker",
+                ]}
+                imageUrl="/portfolio/irag_logo.png"
+                liveUrl="https://www.wisenut.com/sub/AIAgent/irag.php"
               />
 
               <ProjectCard
-                title="업데이트 예정"
+                title="챗봇 솔루션 (WISE iChat)"
                 period="April 2023"
                 description="Seccodeid landing page created using TailwindCSS with responsive design and optimal SEO."
                 technologies={["TailwindCSS", "HTML", "JavaScript"]}
-                imageUrl="/placeholder.svg?height=300&width=600"
-                liveUrl="https://seccodeid.com"
+                imageUrl="/portfolio/ichatV3_logo.jpg"
+                liveUrl="https://www.wisenut.com/sub/ai/chatBot.php"
               />
 
               <ProjectCard
