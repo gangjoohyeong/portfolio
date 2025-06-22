@@ -324,9 +324,17 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <ProjectCard
-                title="RAG 솔루션 (WISE iRAG)"
+                title="㈜와이즈넛 RAG 솔루션 (WISE iRAG)"
                 period="2024 - 2025"
-                description="Implementation of team features based on laravel/jetstream using Filament on Laravel 11, implementing team switching features with Livewire and automatic refresh after team changes."
+                description={
+                  <>
+                    1. Spring Boot / JPA 기반 RAG 관리도구 백엔드 개발
+                    <br />
+                    2. GitLab Runner / Docker 기반 CI/CD 구성
+                    <br />
+                    3. FastAPI / LangGraph 기반 RAG 빌더 개발 (진행 중)
+                  </>
+                }
                 technologies={[
                   "LangGraph",
                   "FastAPI",
@@ -342,35 +350,60 @@ export default function Home() {
               />
 
               <ProjectCard
-                title="챗봇 솔루션 (WISE iChat)"
-                period="April 2023"
-                description="Seccodeid landing page created using TailwindCSS with responsive design and optimal SEO."
+                title="㈜와이즈넛 검색엔진 솔루션 (Search Formula-1)"
+                period="2024"
+                description={
+                  <>
+                    1. 벡터 검색을 위한 언어 모델 (DPR) 학습 관리도구 풀스택
+                    개발
+                  </>
+                }
+                technologies={[
+                  "Spring boot",
+                  "JPA",
+                  "Thymeleaf",
+                  "transformers",
+                ]}
+                imageUrl="/portfolio/schFormula_logo.jpg"
+                liveUrl="https://www.wisenut.com/sub/ai/sch.php"
+              />
+
+              <ProjectCard
+                title="㈜와이즈넛 챗봇 솔루션 (WISE iChat)"
+                period="2023 -2024"
+                description={
+                  <>
+                    1. 고객사에 구축된 챗봇 솔루션 이슈 사후처리 지원
+                    <br />
+                    2. 고객사 요청에 따른 챗봇 솔루션 커스텀 진행
+                  </>
+                }
                 technologies={["TailwindCSS", "HTML", "JavaScript"]}
                 imageUrl="/portfolio/ichatV3_logo.jpg"
                 liveUrl="https://www.wisenut.com/sub/ai/chatBot.php"
               />
 
               <ProjectCard
-                title="업데이트 예정"
-                period="May 2024 - June 2024"
-                description="A campus assignment project from the Programming course to create a blog application using CodeIgniter4 and Bootstrap, equipped with category features, post slugs, admin panel, and comments and replies."
-                technologies={["CodeIgniter4", "Bootstrap", "MySQL"]}
-                imageUrl="/placeholder.svg?height=300&width=600"
-                githubUrl="https://github.com/holiq/cilog"
-              />
-
-              <ProjectCard
-                title="업데이트 예정"
-                period="August 2020 - September 2020"
-                description="A simple blog created with Laravel 7, Tailwind CSS, and AlpineJS, equipped with admin panel features, roles and permissions, comments and replies on posts, as well as slugs and tags on posts."
-                technologies={[
-                  "Laravel 7",
-                  "Tailwind CSS",
-                  "AlpineJS",
-                  "MySQL",
-                ]}
-                imageUrl="/placeholder.svg?height=300&width=600"
-                githubUrl="https://github.com/holiq/blog-laravel"
+                title="검색형 인공지능 개발 프로젝트 (howcan.ai)"
+                period="2023"
+                description={
+                  <>
+                    부스트캠프 AI Tech 5기 최종 프로젝트
+                    <br />
+                    1. 당시 ChatGPT의 문제점인 할루시네이션과 최신 정보 미반영을
+                    보완한 새로운 검색형 인공지능 개발
+                    <br />
+                    2. FastAPI/PostgreSQL 기반 백엔드 개발
+                    <br />
+                    3. FastAPI/transformers 기반 모델 서빙 서버 개발
+                    <br />
+                    4. OpenAI API 기반 모델 파인튜닝용 학습 데이터 구성
+                    (Polyglot-ko, koBART, BERT)
+                  </>
+                }
+                technologies={["FastAPI", "SQLAlchemy", "PostgreSQL", "OpenAI"]}
+                imageUrl="/portfolio/howcan_ai_flow.png"
+                githubUrl="https://github.com/boostcampaitech5/level3_recsys_finalproject-recsys-11"
               />
             </div>
           </div>
@@ -483,6 +516,28 @@ export default function Home() {
                     네이버 커넥트재단 주관
                     <br />
                     RecSys(추천 시스템) 트랙
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
+                <CardHeader>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                    <div>
+                      <CardTitle className="text-xl font-bold">
+                        2022 데이터 크리에이터 캠프
+                      </CardTitle>
+                      <CardDescription className="text-base font-medium mt-1">
+                        우수상 수상
+                      </CardDescription>
+                    </div>
+                    <Badge className="w-fit mt-1 sm:mt-0">2022</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    한국지능정보사회진흥원 주관
+                    <br />
+                    다중 이미지 분류 딥러닝 해커톤
                   </p>
                 </CardContent>
               </Card>

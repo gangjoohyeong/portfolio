@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && node -e \"require('fs').closeSync(require('fs').openSync('out/.nojekyll','w'));\" && git add -f out/ && git commit -m \\\"Deploy\\\" && git subtree push --prefix out origin gh-pages"
+    "deploy": "next build  && node -e \"require('fs').closeSync(require('fs').openSync('out/.nojekyll','w'));\"  && git subtree split --prefix out -b gh-pages-temp  && git push -f origin gh-pages-temp:gh-pages  && git branch -D gh-pages-temp"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
