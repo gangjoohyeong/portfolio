@@ -26,7 +26,7 @@ export default function SkillBadge({ name, level }: SkillBadgeProps) {
     <Badge
       className={cn(
         "px-4 py-1.5 rounded-md text-sm shadow-sm transition-all duration-200",
-        getLevelColor()
+        getLevelColor(),
       )}
     >
       <span className="font-bold">{name}</span>

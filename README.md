@@ -4,10 +4,10 @@
 
 ## 사전 요구사항
 
-| 도구 | 최소 버전 | 설치 |
-|------|----------|------|
-| Node.js | 18 이상 | [nodejs.org](https://nodejs.org) |
-| pnpm | 9.x | `npm install -g pnpm` |
+| 도구    | 최소 버전 | 설치                             |
+| ------- | --------- | -------------------------------- |
+| Node.js | 18 이상   | [nodejs.org](https://nodejs.org) |
+| pnpm    | 9.x       | `npm install -g pnpm`            |
 
 ## 개발 환경 설정
 
@@ -48,12 +48,12 @@ pnpm gh-deploy
 
 ## 주요 스크립트 요약
 
-| 명령어 | 설명 |
-|--------|------|
-| `pnpm dev` | 개발 서버 실행 |
-| `pnpm build` | 프로덕션 빌드 |
-| `pnpm start` | 빌드된 앱 로컬 서빙 |
-| `pnpm lint` | ESLint 실행 |
+| 명령어           | 설명                     |
+| ---------------- | ------------------------ |
+| `pnpm dev`       | 개발 서버 실행           |
+| `pnpm build`     | 프로덕션 빌드            |
+| `pnpm start`     | 빌드된 앱 로컬 서빙      |
+| `pnpm lint`      | ESLint 실행              |
 | `pnpm gh-deploy` | 빌드 + GitHub Pages 배포 |
 
 ## 프로젝트 구조

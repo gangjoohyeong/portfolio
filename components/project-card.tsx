@@ -22,15 +22,18 @@ import {
 import { Github, Globe, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ProjectCardProps {
   title: string;
   period: string;
-  description: string;
+  description: React.ReactNode;
   technologies: string[];
   imageUrl: string;
   githubUrl?: string;
   liveUrl?: string;
+  detailContent?: React.ReactNode;
+  detailImages?: string[];
 }
 
 export default function ProjectCard({
@@ -41,120 +44,174 @@ export default function ProjectCard({
   imageUrl,
   githubUrl,
   liveUrl,
+  detailContent,
+  detailImages,
 }: ProjectCardProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <Card className="overflow-hidden group transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-        <div className="relative h-48 overflow-hidden">
+      <Card className="overflow-hidden group h-full flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-primary/10">
+        <div
+          className="relative h-48 overflow-hidden cursor-pointer"
+          onClick={() => setIsOpen(true)}
+        >
           <Image
             src={imageUrl || "/placeholder.svg"}
             alt={title}
-            layout="responsive"
-            width={1}
-            height={2}
+            layout="fill"
             objectFit="cover"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
         <CardHeader className="p-4">
-          <div className="flex justify-between items-start">
-            <CardTitle className="text-xl font-bold tracking-tight">
+          <div className="flex justify-between items-start gap-2">
+            <CardTitle className="text-xl font-bold tracking-tight line-clamp-1">
               {title}
             </CardTitle>
-            <CardDescription className="text-sm font-medium">
-              {period}
-            </CardDescription>
           </div>
+          <CardDescription className="text-sm font-medium text-primary">
+            {period}
+          </CardDescription>
         </CardHeader>
-        <CardContent className="p-4 pt-0">
-          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+        <CardContent className="p-4 pt-0 flex-grow">
+          <div className="text-sm text-muted-foreground line-clamp-3 leading-relaxed mb-4">
             {description}
-          </p>
-          <div className="flex flex-wrap gap-1 mt-3">
-            {technologies.map((tech, index) => (
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {technologies.slice(0, 5).map((tech, index) => (
               <Badge key={index} variant="secondary" className="text-xs">
                 {tech}
               </Badge>
             ))}
+            {technologies.length > 5 && (
+              <Badge variant="secondary" className="text-xs">
+                +{technologies.length - 5}
+              </Badge>
+            )}
           </div>
         </CardContent>
-        <CardFooter className="p-4 pt-0 flex justify-between">
+        <CardFooter className="p-4 pt-0 flex justify-between items-center mt-auto">
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
-                className="transition-all duration-200 hover:bg-primary/10 hover:text-primary font-medium"
+                className="transition-all duration-200 hover:bg-primary hover:text-primary-foreground font-medium"
               >
                 상세 보기
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[600px]">
-              <DialogHeader>
-                <DialogTitle className="text-xl font-bold">{title}</DialogTitle>
-                <DialogDescription className="text-base font-medium">
-                  {period}
-                </DialogDescription>
-              </DialogHeader>
-              <div className="relative h-64 w-full overflow-hidden rounded-md">
-                <Image
-                  src={imageUrl || "/placeholder.svg"}
-                  alt={title}
-                  layout="responsive"
-                  width={1}
-                  height={2}
-                  objectFit="cover"
-                  className="object-cover"
-                />
-              </div>
-              <div className="space-y-4">
-                <p className="leading-relaxed">{description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {technologies.map((tech, index) => (
-                    <Badge key={index} variant="secondary">
-                      {tech}
-                    </Badge>
-                  ))}
+            <DialogContent className="sm:max-w-4xl max-h-[90vh] flex flex-col p-0 gap-0">
+              <ScrollArea className="max-h-[90vh] overflow-y-auto">
+                <div className="p-6 space-y-6">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-bold">
+                      {title}
+                    </DialogTitle>
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <span className="font-medium text-primary">{period}</span>
+                    </div>
+                  </DialogHeader>
+
+                  {/* Image Gallery */}
+                  <div className="space-y-4">
+                    <div className="relative aspect-video w-full overflow-hidden rounded-lg border bg-muted">
+                      <Image
+                        src={imageUrl || "/placeholder.svg"}
+                        alt={title}
+                        layout="fill"
+                        objectFit="cover"
+                        className="object-cover"
+                      />
+                    </div>
+                    {detailImages && detailImages.length > 0 && (
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                        {detailImages.map((img, idx) => (
+                          <div
+                            key={idx}
+                            className="relative aspect-video overflow-hidden rounded-md border bg-muted"
+                          >
+                            <Image
+                              src={img}
+                              alt={`${title} detail ${idx + 1}`}
+                              layout="fill"
+                              objectFit="cover"
+                              className="object-cover transition-transform hover:scale-105"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="space-y-6">
+                    {/* Description */}
+                    <div className="prose prose-sm dark:prose-invert max-w-none">
+                      <div className="text-base leading-relaxed space-y-2">
+                        {detailContent || description}
+                      </div>
+                    </div>
+
+                    {/* Tech Stack */}
+                    <div className="space-y-2">
+                      <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                        사용 기술
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {technologies.map((tech, index) => (
+                          <Badge
+                            key={index}
+                            variant="secondary"
+                            className="px-3 py-1 text-sm"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Links */}
+                    <div className="flex flex-wrap gap-3 pt-4 border-t">
+                      {githubUrl && (
+                        <Button variant="outline" asChild>
+                          <Link
+                            href={githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2"
+                          >
+                            <Github className="h-4 w-4" />
+                            GitHub
+                          </Link>
+                        </Button>
+                      )}
+                      {liveUrl && (
+                        <Button variant="default" asChild>
+                          <Link
+                            href={liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2"
+                          >
+                            <Globe className="h-4 w-4" />
+                            웹사이트 방문
+                          </Link>
+                        </Button>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {githubUrl && (
-                    <Button variant="outline" size="sm" asChild>
-                      <Link
-                        href={githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2"
-                      >
-                        <Github className="h-4 w-4" />
-                        GitHub
-                      </Link>
-                    </Button>
-                  )}
-                  {liveUrl && (
-                    <Button variant="outline" size="sm" asChild>
-                      <Link
-                        href={liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2"
-                      >
-                        <Globe className="h-4 w-4" />
-                        설명 페이지
-                      </Link>
-                    </Button>
-                  )}
-                </div>
-              </div>
+              </ScrollArea>
             </DialogContent>
           </Dialog>
+
           <div className="flex gap-2">
             {githubUrl && (
               <Button
                 variant="ghost"
                 size="icon"
-                className="transition-all duration-200 hover:bg-primary/10 hover:text-primary"
+                className="text-muted-foreground hover:text-primary transition-colors"
                 asChild
               >
                 <Link
@@ -162,7 +219,7 @@ export default function ProjectCard({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Github className="h-4 w-4" />
+                  <Github className="h-5 w-5" />
                   <span className="sr-only">GitHub</span>
                 </Link>
               </Button>
@@ -171,11 +228,11 @@ export default function ProjectCard({
               <Button
                 variant="ghost"
                 size="icon"
-                className="transition-all duration-200 hover:bg-primary/10 hover:text-primary"
+                className="text-muted-foreground hover:text-primary transition-colors"
                 asChild
               >
                 <Link href={liveUrl} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="h-4 w-4" />
+                  <ExternalLink className="h-5 w-5" />
                   <span className="sr-only">Live Demo</span>
                 </Link>
               </Button>

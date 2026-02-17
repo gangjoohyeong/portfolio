@@ -203,42 +203,36 @@ export default function Home() {
             <div className="max-w-4xl mx-auto bg-card rounded-xl p-6 md:p-8 shadow-sm border border-primary/10">
               <div className="space-y-6">
                 <p className="text-xl font-medium leading-relaxed md:leading-loose">
-                  안녕하세요. Software Engineer{" "}
+                  안녕하세요. 개발자{" "}
                   <span className="text-primary font-semibold">강주형</span>
                   입니다. <br />
-                  주로 AI 도메인 프로젝트의 Python과 Java 기반 서버 개발을
-                  수행했습니다.
+                  주로 AI 도메인의 솔루션 개발과 연구를 수행했습니다.
                 </p>
 
                 <div className="space-y-5 text-base md:text-lg leading-relaxed md:leading-loose text-card-foreground/90">
                   <p>
-                    초기에는 챗봇 솔루션의 유지보수와 고객사 맞춤형
-                    커스터마이징을 담당하며 현장의 다양한 요구사항을 이해하는
-                    법을 배웠습니다. 이후 RAG 솔루션 개발로 영역을 확장하면서,
-                    다양한 환경에서 안정적으로 동작하는 AI 솔루션 백엔드를
-                    구축하는 경험을 쌓았습니다.
+                    최근에는 <strong>MCP(Model Context Protocol)</strong> 기반의
+                    AI 에이전트 개발과 <strong>Kubernetes</strong> 기반의 인프라
+                    구축에 집중하고 있습니다. 초기에는 챗봇 솔루션의 유지보수와
+                    고객사 맞춤형 커스터마이징을 담당하며 현장의 다양한
+                    요구사항을 이해하는 법을 배웠습니다. 이후 RAG 솔루션 개발로
+                    영역을 확장하면서, 다양한 환경에서 안정적으로 동작하는 AI
+                    솔루션 백엔드를 구축하는 경험을 쌓았습니다.
                   </p>
 
-                  {/* <blockquote className="pl-4 border-l-4 border-primary/50 italic my-6 md:my-8 py-2 bg-primary/5 rounded-r-lg">
-                    <p className="text-lg md:text-xl font-light">
-                      
-                    </p>
-                  </blockquote> */}
-
                   <p>
-                    현재는 RAG 빌더를 동적인 워크플로우 시스템으로 고도화하는
-                    프로젝트를 수행하고 있습니다. LangGraph를 기반으로 한 엔진
-                    개발부터 Vueflow 기반의 직관적인 UI 구성까지, 사용자가
-                    복잡한 AI 워크플로우를 쉽게 구성할 수 있도록 하는 것이
-                    목표입니다. 그 과정에서 GitLab Runner 기반 CI/CD
-                    파이프라인을 직접 구축하는 등 개발 효율성도 높이기 위해
-                    DevOps 경험도 쌓고 있습니다.
+                    현재는 사내 플레이그라운드를 구축하여 Langflow 기반의 AI
+                    에이전트를 쉽게 배포하고 테스트할 수 있는 환경을 만들고
+                    있습니다. 또한, LLM을 활용한 다양한 도구(Tool)들을 연결하는
+                    MCP 서버 및 호스트 개발을 통해 AI 에이전트의 확장성을 높이는
+                    연구를 진행 중입니다.
                   </p>
 
                   <p>
                     업무 시간 외에도 최신 AI 동향을 꾸준히 탐색해 팀원들과
-                    활발히 공유하고, <br /> 실무에 적용 가치가 있는 기술은
-                    선별해 적극적으로 도입을 검토합니다. <br />
+                    활발히 공유하고, <br />
+                    실무에 적용 가치가 있는 기술은 선별해 적극적으로 도입을
+                    검토합니다.
                   </p>
                   <p>
                     프론트엔드 개발은 아직 성숙하지 않아서, 이 페이지는{" "}
@@ -249,6 +243,15 @@ export default function Home() {
                       className="text-primary hover:text-primary/80"
                     >
                       v0
+                    </a>
+                    와{" "}
+                    <a
+                      href="https://antigravity.google/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary/80"
+                    >
+                      Antigravity
                     </a>
                     의 도움을 받았습니다.
                   </p>
@@ -301,12 +304,13 @@ export default function Home() {
                 location="경기도 성남시"
                 type="AI연구소 AI에이전트랩 통합솔루션팀"
                 period="2023.10 - 현재"
-                description="챗봇, RAG 등 AI 도메인 기반 제품 엔진 및 관리도구 연구 및 개발"
+                description="AI 에이전트, RAG, 챗봇 등 AI 도메인 기반 제품 엔진 및 관리도구 연구 개발"
                 responsibilities={[
+                  "사내 플레이그라운드 개발 (k8s, Langflow)",
+                  "MCP 기반 에이전트 개발 (FastMCP, vLLM)",
                   "LangGraph 기반 RAG 빌더 개발",
-                  "RAG 관리도구 개발",
-                  "챗봇 관리도구 및 엔진 유지보수",
-                  "벡터 검색 모델 학습 관리도구 개발",
+                  "사내 솔루션 통합 관리도구 개발",
+                  "AI 솔루션(챗봇, 검색엔진) 유지보수",
                 ]}
               />
             </div>
@@ -322,90 +326,157 @@ export default function Home() {
               </h2>
               <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <ProjectCard
-                title="㈜와이즈넛 RAG 솔루션 (WISE iRAG)"
-                period="2024 - 2025"
-                description={
-                  <>
-                    1. Spring Boot / JPA 기반 RAG 관리도구 백엔드 개발
-                    <br />
-                    2. GitLab Runner / Docker 기반 CI/CD 구성
-                    <br />
-                    3. FastAPI / LangGraph 기반 RAG 빌더 개발 (진행 중)
-                  </>
-                }
-                technologies={[
-                  "LangGraph",
-                  "FastAPI",
-                  "Spring Boot",
-                  "Nuxt.js",
-                  "FastAPI",
-                  "PostgreSQL",
-                  "GitLab CI",
-                  "Docker",
-                ]}
-                imageUrl="/portfolio/irag_logo.png"
-                liveUrl="https://www.wisenut.com/sub/AIAgent/irag.php"
-              />
+            {/* 1. 사내 플레이그라운드 개발 */}
+            <ProjectCard
+              title="사내 플레이그라운드 개발"
+              period="2026.01 - 진행중"
+              description={
+                <>
+                  사내 연구소에서 AI Agent를 쉽게 구성하고 사업부에 배포할 수
+                  있는 통합 환경 구축
+                  <br />
+                  1. <strong>Kubernetes 기반 인프라 구성:</strong> 사내 IDC 서버
+                  활용 kubeadm 기반 k8s 환경 구축
+                  <br />
+                  2. <strong>AI 에이전트 배포 환경:</strong> Langflow 커스텀 및
+                  사내 제품 노드 통합
+                </>
+              }
+              technologies={["Kubernetes", "Langflow", "Docker", "Linux"]}
+              imageUrl="/placeholder.svg"
+            />
 
-              <ProjectCard
-                title="㈜와이즈넛 검색엔진 솔루션 (Search Formula-1)"
-                period="2024"
-                description={
-                  <>
-                    1. 벡터 검색을 위한 언어 모델 (DPR) 학습 관리도구 풀스택
-                    개발
-                  </>
-                }
-                technologies={[
-                  "Spring boot",
-                  "JPA",
-                  "Thymeleaf",
-                  "transformers",
-                ]}
-                imageUrl="/portfolio/schFormula_logo.jpg"
-                liveUrl="https://www.wisenut.com/sub/ai/sch.php"
-              />
+            {/* 2. MCP 기반 에이전트 개발 */}
+            <ProjectCard
+              title="MCP 기반 에이전트 개발"
+              period="2025.05 - 2025.08"
+              description={
+                <>
+                  LLM과 다양한 도구(Tool)를 표준화된 프로토콜(MCP)로 연결하는
+                  에이전트 시스템 개발
+                  <br />
+                  1. <strong>vLLM 서빙 연동:</strong> 오픈소스 32B 모델 파인튜닝
+                  및 서빙
+                  <br />
+                  2. <strong>MCP Host/Client 개발:</strong> FastMCP 기반 Tool
+                  Calling 흐름 구현
+                  <br />
+                  3. <strong>MCP 서버 연동:</strong> 사내 검색엔진 솔루션 및 n8n
+                  연동
+                </>
+              }
+              technologies={["FastAPI", "FastMCP", "VLLM", "n8n", "MCP"]}
+              imageUrl="/placeholder.svg"
+              liveUrl="https://www.wisenut.com/sub/AlAgent/AlAgent.php"
+            />
 
-              <ProjectCard
-                title="㈜와이즈넛 챗봇 솔루션 (WISE iChat)"
-                period="2023 -2024"
-                description={
-                  <>
-                    1. 고객사에 구축된 챗봇 솔루션 이슈 사후처리 지원
-                    <br />
-                    2. 고객사 요청에 따른 챗봇 솔루션 커스텀 진행
-                  </>
-                }
-                technologies={["TailwindCSS", "HTML", "JavaScript"]}
-                imageUrl="/portfolio/ichatV3_logo.jpg"
-                liveUrl="https://www.wisenut.com/sub/ai/chatBot.php"
-              />
+            {/* 3. LangGraph 기반 RAG 빌더 개발 */}
+            <ProjectCard
+              title="LangGraph 기반 RAG 빌더 개발"
+              period="2025.01 - 2025.04"
+              description={
+                <>
+                  사용자가 RAG 파이프라인(Retriever, Reranker, LLM 등)을
+                  동적으로 구성할 수 있는 빌더 개발
+                  <br />
+                  1. <strong>동적 워크플로우 엔진:</strong> LangGraph 기반 노드
+                  실행 및 상태 관리
+                  <br />
+                  2. <strong>시각적 관리도구:</strong> Vueflow 기반 UI 및 백엔드
+                  연동
+                </>
+              }
+              technologies={[
+                "Python",
+                "FastAPI",
+                "LangGraph",
+                "TypeScript",
+                "Nuxt.js",
+                "Vueflow",
+              ]}
+              imageUrl="/placeholder.svg"
+            />
 
-              <ProjectCard
-                title="검색형 인공지능 개발 프로젝트 (howcan.ai)"
-                period="2023"
-                description={
-                  <>
-                    부스트캠프 AI Tech 5기 최종 프로젝트
-                    <br />
-                    1. 당시 ChatGPT의 문제점인 할루시네이션과 최신 정보 미반영을
-                    보완한 새로운 검색형 인공지능 개발
-                    <br />
-                    2. FastAPI/PostgreSQL 기반 백엔드 개발
-                    <br />
-                    3. FastAPI/transformers 기반 모델 서빙 서버 개발
-                    <br />
-                    4. OpenAI API 기반 모델 파인튜닝용 학습 데이터 구성
-                    (Polyglot-ko, koBART, BERT)
-                  </>
-                }
-                technologies={["FastAPI", "SQLAlchemy", "PostgreSQL", "OpenAI"]}
-                imageUrl="/portfolio/howcan_ai_flow.png"
-                githubUrl="https://github.com/boostcampaitech5/level3_recsys_finalproject-recsys-11"
-              />
-            </div>
+            {/* 4. 사내 솔루션 관리도구 개발 */}
+            <ProjectCard
+              title="사내 솔루션 관리도구 개발"
+              period="2024.07 - 2025.12"
+              description={
+                <>
+                  다양한 AI 솔루션(RAG, 챗봇 등)을 통합 관리하는 시스템 개발
+                  <br />
+                  1. <strong>RAG 관리도구 백엔드:</strong> 다중 DB 벤더(MySQL,
+                  Oracle, PostgreSQL 등) 지원
+                  <br />
+                  2. <strong>통합 관리도구:</strong> Spring Boot 인증 모듈 및
+                  React 기반 통합 화면
+                  <br />
+                  3. <strong>DevOps:</strong> 사내 IDC 서버 및 GitLab CI 기반
+                  CI/CD 구성
+                </>
+              }
+              technologies={[
+                "Java",
+                "Spring Boot",
+                "JPA",
+                "Nuxt.js",
+                "React",
+                "Next.js",
+                "GitLab CI",
+              ]}
+              imageUrl="/portfolio/irag_logo.png"
+              liveUrl="https://www.wisenut.com/sub/rag/irag.php"
+            />
+
+            {/* 5. AI 솔루션 유지보수 */}
+            <ProjectCard
+              title="AI 솔루션 유지보수 (챗봇, 검색엔진)"
+              period="2023.10 - 2024.07"
+              description={
+                <>
+                  기존 납품된 AI 솔루션의 안정적인 운영 지원 및 커스터마이징
+                  <br />
+                  1. <strong>이슈 처리 및 커스텀:</strong> 고객사 요청사항 반영
+                  및 엔진 최적화
+                  <br />
+                  2. <strong>모델 관리도구:</strong> 챗봇/검색엔진용 딥러닝 모델
+                  학습 관리 도구 개발
+                </>
+              }
+              technologies={[
+                "Java",
+                "Spring Boot",
+                "JSP",
+                "Thymeleaf",
+                "Python",
+                "transformers",
+              ]}
+              imageUrl="/portfolio/ichatV3_logo.jpg"
+              liveUrl="https://www.wisenut.com/sub/ai/chatBot.php"
+            />
+
+            {/* 6. howcan.ai */}
+            <ProjectCard
+              title="검색형 인공지능 개발 프로젝트 (howcan.ai)"
+              period="2023"
+              description={
+                <>
+                  부스트캠프 AI Tech 5기 최종 프로젝트
+                  <br />
+                  1. <strong>검색형 AI:</strong> 할루시네이션 최소화를 위한 RAG
+                  기반 Q&A 서비스
+                  <br />
+                  2. <strong>모델 서빙 및 백엔드:</strong> FastAPI/Transformers
+                  기반 서빙 서버 구축
+                  <br />
+                  3. <strong>데이터셋 구축:</strong> Polyglot-ko, koBART 기반
+                  파인튜닝 데이터 구성
+                </>
+              }
+              technologies={["FastAPI", "SQLAlchemy", "PostgreSQL", "OpenAI"]}
+              imageUrl="/portfolio/howcan_ai_flow.png"
+              githubUrl="https://github.com/boostcampaitech5/level3_recsys_finalproject-recsys-11"
+            />
           </div>
         </section>
 
@@ -442,7 +513,9 @@ export default function Home() {
                         name="Java (Spring boot)"
                         level="Intermediate"
                       />
+                      <SkillBadge name="MCP (FastMCP)" level="Intermediate" />
                       <SkillBadge name="LangGraph" level="Intermediate" />
+                      <SkillBadge name="VLLM" level="Beginner" />
                     </div>
                   </TabsContent>
                   <TabsContent value="database" className="mt-6 space-y-4">
@@ -463,6 +536,7 @@ export default function Home() {
                       Infrastructure (DevOps)
                     </h3>
                     <div className="flex flex-wrap gap-3 mt-2">
+                      <SkillBadge name="Kubernetes" level="Intermediate" />
                       <SkillBadge name="Linux" level="Intermediate" />
                       <SkillBadge name="Git" level="Advanced" />
                       <SkillBadge name="GitLab" level="Advanced" />
@@ -538,6 +612,27 @@ export default function Home() {
                     한국지능정보사회진흥원 주관
                     <br />
                     다중 이미지 분류 딥러닝 해커톤
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
+                <CardHeader>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                    <div>
+                      <CardTitle className="text-xl font-bold">
+                        제7기 대학생 통계교육 재능기부단
+                      </CardTitle>
+                      <CardDescription className="text-base font-medium mt-1">
+                        통계청 통계교육원
+                      </CardDescription>
+                    </div>
+                    <Badge className="w-fit mt-1 sm:mt-0">2021.12</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    통계 관련 교육 봉사 활동 수료
                   </p>
                 </CardContent>
               </Card>
