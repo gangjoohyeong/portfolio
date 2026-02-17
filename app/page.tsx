@@ -476,7 +476,7 @@ export default function Home() {
                 </>
               }
               technologies={["FastAPI", "SQLAlchemy", "PostgreSQL", "OpenAI"]}
-              imageUrl="/portfolio/howcan_ai_logo.png"
+              imageUrl="/portfolio/howcanai_logo.png"
               detailImages={[
                 "/portfolio/howcanai_flow.png",
                 "/portfolio/howcanai1.png",
