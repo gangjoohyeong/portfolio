@@ -48,6 +48,7 @@ export default function ProjectCard({
   detailImages,
 }: ProjectCardProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
     <>
@@ -59,9 +60,9 @@ export default function ProjectCard({
           <Image
             src={imageUrl || "/placeholder.svg"}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
         <CardHeader className="p-4">
@@ -116,13 +117,18 @@ export default function ProjectCard({
 
                   {/* Image Gallery */}
                   <div className="space-y-4">
-                    <div className="relative aspect-video w-full overflow-hidden rounded-lg border bg-muted">
+                    <div
+                      className="relative aspect-video w-full overflow-hidden rounded-lg border bg-muted cursor-zoom-in"
+                      onClick={() =>
+                        setSelectedImage(imageUrl || "/placeholder.svg")
+                      }
+                    >
                       <Image
                         src={imageUrl || "/placeholder.svg"}
                         alt={title}
-                        layout="fill"
-                        objectFit="cover"
-                        className="object-cover"
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, 800px"
                       />
                     </div>
                     {detailImages && detailImages.length > 0 && (
@@ -130,14 +136,15 @@ export default function ProjectCard({
                         {detailImages.map((img, idx) => (
                           <div
                             key={idx}
-                            className="relative aspect-video overflow-hidden rounded-md border bg-muted"
+                            className="relative aspect-video overflow-hidden rounded-md border bg-muted cursor-zoom-in"
+                            onClick={() => setSelectedImage(img)}
                           >
                             <Image
                               src={img}
                               alt={`${title} detail ${idx + 1}`}
-                              layout="fill"
-                              objectFit="cover"
-                              className="object-cover transition-transform hover:scale-105"
+                              fill
+                              className="object-contain transition-transform hover:scale-105"
+                              sizes="(max-width: 768px) 50vw, 33vw"
                             />
                           </div>
                         ))}
@@ -203,6 +210,26 @@ export default function ProjectCard({
                   </div>
                 </div>
               </ScrollArea>
+            </DialogContent>
+          </Dialog>
+
+          {/* Lightbox Dialog */}
+          <Dialog
+            open={!!selectedImage}
+            onOpenChange={(open) => !open && setSelectedImage(null)}
+          >
+            <DialogContent className="max-w-[95vw] h-[90vh] p-0 border-none bg-background/50 backdrop-blur-sm shadow-none flex items-center justify-center">
+              <div className="relative w-full h-full">
+                {selectedImage && (
+                  <Image
+                    src={selectedImage}
+                    alt="Enlarged view"
+                    fill
+                    className="object-contain"
+                    sizes="100vw"
+                  />
+                )}
+              </div>
             </DialogContent>
           </Dialog>
 

@@ -6,9 +6,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "강주형 - Software Engineer Portfolio",
-  description:
-    "Professional portfolio of 강주형, a Software Engineer specializing in Laravel and web technologies.",
+  title: "강주형 포트폴리오",
+  description: "개발자 강주형의 포트폴리오 웹사이트",
 };
 
 export default function RootLayout({

@@ -23,6 +23,20 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+function calculateExperienceDuration() {
+  const start = new Date(2023, 9);
+  const now = new Date();
+  let months =
+    (now.getFullYear() - start.getFullYear()) * 12 +
+    (now.getMonth() - start.getMonth());
+  const years = Math.floor(months / 12);
+  months = (months % 12) + 1;
+
+  return `${years > 0 ? `${years}년 ` : ""}${
+    months > 0 ? `${months}개월` : ""
+  }`;
+}
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
@@ -113,24 +127,10 @@ export default function Home() {
                 Software Engineer
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed md:leading-loose">
-                {(() => {
-                  const start = new Date(2023, 9);
-                  const now = new Date();
-                  let months =
-                    (now.getFullYear() - start.getFullYear()) * 12 +
-                    (now.getMonth() - start.getMonth());
-                  const years = Math.floor(months / 12);
-                  months = months % 12;
-                  return (
-                    <>
-                      {`${years > 0 ? `${years}년 ` : ""}${
-                        months > 0 ? `${months}개월` : ""
-                      }의 RAG, 챗봇 등 AI 솔루션 제품 개발 경험을 가지고 있고,`}
-                      <br />
-                      빠르게 발전하는 AI 트렌드에 대한 깊은 관심이 있습니다.
-                    </>
-                  );
-                })()}
+                {calculateExperienceDuration()}의 RAG, 챗봇 등 AI 솔루션 제품
+                개발 경험을 가지고 있고,
+                <br />
+                현재는 AI Agent 개발에 중점을 두고 있습니다.
               </p>
             </div>
             <div className="flex flex-wrap gap-4 justify-center">
@@ -237,7 +237,7 @@ export default function Home() {
                   <p>
                     프론트엔드 개발은 아직 성숙하지 않아서, 이 페이지는{" "}
                     <a
-                      href="https://v0.dev"
+                      href="https://v0.app"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary hover:text-primary/80"
@@ -300,9 +300,9 @@ export default function Home() {
             <div className="grid gap-6">
               <ExperienceCard
                 title="연구원"
-                company="(주)와이즈넛"
+                company="㈜와이즈넛"
                 location="경기도 성남시"
-                type="AI연구소 AI에이전트랩 통합솔루션팀"
+                type="플랫폼 기술연구소 - AI어댑티브솔루션팀"
                 period="2023.10 - 현재"
                 description="AI 에이전트, RAG, 챗봇 등 AI 도메인 기반 제품 엔진 및 관리도구 연구 개발"
                 responsibilities={[
@@ -328,12 +328,12 @@ export default function Home() {
             </div>
             {/* 1. 사내 플레이그라운드 개발 */}
             <ProjectCard
-              title="사내 플레이그라운드 개발"
+              title="[와이즈넛] 사내 플레이그라운드 개발"
               period="2026.01 - 진행중"
               description={
                 <>
-                  사내 연구소에서 AI Agent를 쉽게 구성하고 사업부에 배포할 수
-                  있는 통합 환경 구축
+                  사내 연구소에서 AI Agent를 쉽게 구성 및 검증하고 사업부에
+                  배포할 수 있는 통합 환경 구축
                   <br />
                   1. <strong>Kubernetes 기반 인프라 구성:</strong> 사내 IDC 서버
                   활용 kubeadm 기반 k8s 환경 구축
@@ -342,37 +342,39 @@ export default function Home() {
                   사내 제품 노드 통합
                 </>
               }
-              technologies={["Kubernetes", "Langflow", "Docker", "Linux"]}
-              imageUrl="/placeholder.svg"
+              technologies={["Kubernetes", "Langflow"]}
+              imageUrl="/portfolio/playground1.png"
+              detailImages={["/portfolio/playground2.png"]}
             />
 
             {/* 2. MCP 기반 에이전트 개발 */}
             <ProjectCard
-              title="MCP 기반 에이전트 개발"
-              period="2025.05 - 2025.08"
+              title="[와이즈넛] MCP 기반 에이전트 개발"
+              period="2025.05 - 2025.12"
               description={
                 <>
                   LLM과 다양한 도구(Tool)를 표준화된 프로토콜(MCP)로 연결하는
                   에이전트 시스템 개발
                   <br />
-                  1. <strong>vLLM 서빙 연동:</strong> 오픈소스 32B 모델 파인튜닝
-                  및 서빙
+                  1. <strong>vLLM 서빙 연동:</strong> 오픈소스 32B 기반 파인튜닝
+                  모델 서빙
                   <br />
-                  2. <strong>MCP Host/Client 개발:</strong> FastMCP 기반 Tool
-                  Calling 흐름 구현
+                  2. <strong>MCP Host(Client) 개발:</strong> FastMCP 기반 Tool
+                  Calling iteration 구현
                   <br />
                   3. <strong>MCP 서버 연동:</strong> 사내 검색엔진 솔루션 및 n8n
-                  연동
+                  등 연동
                 </>
               }
-              technologies={["FastAPI", "FastMCP", "VLLM", "n8n", "MCP"]}
-              imageUrl="/placeholder.svg"
-              liveUrl="https://www.wisenut.com/sub/AlAgent/AlAgent.php"
+              technologies={["FastAPI", "FastMCP", "vLLM", "MCP"]}
+              imageUrl="/portfolio/lloa_logo.png"
+              detailImages={["/portfolio/lloa1.png", "/portfolio/lloa2.png"]}
+              liveUrl="https://www.wisenut.com/sub/AIAgent/Llm.php"
             />
 
             {/* 3. LangGraph 기반 RAG 빌더 개발 */}
             <ProjectCard
-              title="LangGraph 기반 RAG 빌더 개발"
+              title="[와이즈넛] LangGraph 기반 RAG 빌더 개발"
               period="2025.01 - 2025.04"
               description={
                 <>
@@ -394,12 +396,12 @@ export default function Home() {
                 "Nuxt.js",
                 "Vueflow",
               ]}
-              imageUrl="/placeholder.svg"
+              imageUrl="/portfolio/workflow1.png"
             />
 
             {/* 4. 사내 솔루션 관리도구 개발 */}
             <ProjectCard
-              title="사내 솔루션 관리도구 개발"
+              title="[와이즈넛] 사내 솔루션 관리도구 개발"
               period="2024.07 - 2025.12"
               description={
                 <>
@@ -409,7 +411,7 @@ export default function Home() {
                   Oracle, PostgreSQL 등) 지원
                   <br />
                   2. <strong>통합 관리도구:</strong> Spring Boot 인증 모듈 및
-                  React 기반 통합 화면
+                  React/Next.js 기반 통합 화면
                   <br />
                   3. <strong>DevOps:</strong> 사내 IDC 서버 및 GitLab CI 기반
                   CI/CD 구성
@@ -430,7 +432,7 @@ export default function Home() {
 
             {/* 5. AI 솔루션 유지보수 */}
             <ProjectCard
-              title="AI 솔루션 유지보수 (챗봇, 검색엔진)"
+              title="[와이즈넛] AI 솔루션 유지보수 (챗봇, 검색엔진)"
               period="2023.10 - 2024.07"
               description={
                 <>
@@ -439,8 +441,8 @@ export default function Home() {
                   1. <strong>이슈 처리 및 커스텀:</strong> 고객사 요청사항 반영
                   및 엔진 최적화
                   <br />
-                  2. <strong>모델 관리도구:</strong> 챗봇/검색엔진용 딥러닝 모델
-                  학습 관리 도구 개발
+                  2. <strong>관리도구 개발:</strong> 레거시 웹 관리도구 관리 및
+                  커스텀
                 </>
               }
               technologies={[
@@ -474,7 +476,12 @@ export default function Home() {
                 </>
               }
               technologies={["FastAPI", "SQLAlchemy", "PostgreSQL", "OpenAI"]}
-              imageUrl="/portfolio/howcan_ai_flow.png"
+              imageUrl="/portfolio/howcan_ai_logo.png"
+              detailImages={[
+                "/portfolio/howcanai_flow.png",
+                "/portfolio/howcanai1.png",
+                "/portfolio/howcanai2.png",
+              ]}
               githubUrl="https://github.com/boostcampaitech5/level3_recsys_finalproject-recsys-11"
             />
           </div>
@@ -513,9 +520,10 @@ export default function Home() {
                         name="Java (Spring boot)"
                         level="Intermediate"
                       />
-                      <SkillBadge name="MCP (FastMCP)" level="Intermediate" />
+                      <SkillBadge name="MCP" level="Intermediate" />
                       <SkillBadge name="LangGraph" level="Intermediate" />
-                      <SkillBadge name="VLLM" level="Beginner" />
+                      <SkillBadge name="Langflow" level="Intermediate" />
+                      <SkillBadge name="vLLM" level="Beginner" />
                     </div>
                   </TabsContent>
                   <TabsContent value="database" className="mt-6 space-y-4">
@@ -536,7 +544,7 @@ export default function Home() {
                       Infrastructure (DevOps)
                     </h3>
                     <div className="flex flex-wrap gap-3 mt-2">
-                      <SkillBadge name="Kubernetes" level="Intermediate" />
+                      <SkillBadge name="Kubernetes" level="Beginner" />
                       <SkillBadge name="Linux" level="Intermediate" />
                       <SkillBadge name="Git" level="Advanced" />
                       <SkillBadge name="GitLab" level="Advanced" />
@@ -840,7 +848,7 @@ export default function Home() {
                     <div>
                       <p className="font-semibold text-base">지역</p>
                       <p className="text-sm text-muted-foreground">
-                        서울특별시
+                        경기도 성남시
                       </p>
                     </div>
                   </div>
