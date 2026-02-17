@@ -32,7 +32,7 @@ pnpm build
 ## 배포 (GitHub Pages)
 
 ```bash
-pnpm deploy
+pnpm gh-deploy
 ```
 
 이 명령은 다음 단계를 자동으로 수행합니다:
@@ -54,7 +54,7 @@ pnpm deploy
 | `pnpm build` | 프로덕션 빌드 |
 | `pnpm start` | 빌드된 앱 로컬 서빙 |
 | `pnpm lint` | ESLint 실행 |
-| `pnpm deploy` | 빌드 + GitHub Pages 배포 |
+| `pnpm gh-deploy` | 빌드 + GitHub Pages 배포 |
 
 ## 프로젝트 구조
 
