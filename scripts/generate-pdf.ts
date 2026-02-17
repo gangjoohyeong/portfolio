@@ -264,8 +264,8 @@ function buildHtml(): string {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 220px;
-      height: 145px;
+      width: 100%;
+      height: 260px;
       border-radius: 6px;
       border: 1px solid #e2e8f0;
       background: #f8fafc;
@@ -283,8 +283,7 @@ function buildHtml(): string {
     }
 
     .project-img-box.logo-box {
-      width: 120px;
-      height: 96px;
+      height: 200px;
       background: #ffffff;
     }
 
@@ -477,12 +476,12 @@ function buildHtml(): string {
                 const allBoxes: string[] = [];
                 if (mainUri) {
                   allBoxes.push(
-                    `<div class="project-img-box logo-box"><img src="${mainUri}" alt="${proj.title}" /></div>`
+                    `<div class="project-img-box logo-box"><img src="${mainUri}" alt="${proj.title}" /></div>`,
                   );
                 }
                 detailUris.forEach((uri) => {
                   allBoxes.push(
-                    `<div class="project-img-box"><img src="${uri}" alt="${proj.title} \uc0c1\uc138" /></div>`
+                    `<div class="project-img-box"><img src="${uri}" alt="${proj.title} \uc0c1\uc138" /></div>`,
                   );
                 });
 
@@ -569,10 +568,7 @@ function buildHtml(): string {
 
 async function generatePdf() {
   const outputFileName = includeImages ? "portfolio.pdf" : "resume.pdf";
-  const outputPath = path.resolve(
-    __dirname,
-    `../pdf/${outputFileName}`,
-  );
+  const outputPath = path.resolve(__dirname, `../pdf/${outputFileName}`);
   const outputDir = path.dirname(outputPath);
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });

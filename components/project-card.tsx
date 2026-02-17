@@ -219,6 +219,7 @@ export default function ProjectCard({
             onOpenChange={(open) => !open && setSelectedImage(null)}
           >
             <DialogContent className="max-w-[95vw] h-[90vh] p-0 border-none bg-background/50 backdrop-blur-sm shadow-none flex items-center justify-center">
+              <DialogTitle className="sr-only">이미지 확대보기</DialogTitle>
               <div className="relative w-full h-full">
                 {selectedImage && (
                   <Image

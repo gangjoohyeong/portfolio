@@ -35,6 +35,8 @@ export interface Project {
   technologies: string[];
   imageUrl?: string;
   detailImages?: string[];
+  liveUrl?: string;
+  githubUrl?: string;
 }
 
 export interface Skill {
@@ -137,6 +139,7 @@ export const portfolioData: PortfolioData = {
       technologies: ["FastAPI", "FastMCP", "vLLM", "MCP"],
       imageUrl: "/portfolio/lloa_logo.png",
       detailImages: ["/portfolio/lloa1.png", "/portfolio/lloa2.png"],
+      liveUrl: "https://www.wisenut.com/sub/AIAgent/Llm.php",
     },
     {
       title: "[와이즈넛] LangGraph 기반 RAG 빌더 개발",
@@ -175,6 +178,7 @@ export const portfolioData: PortfolioData = {
         "GitLab CI",
       ],
       imageUrl: "/portfolio/irag_logo.png",
+      liveUrl: "https://www.wisenut.com/sub/rag/irag.php",
     },
     {
       title: "[와이즈넛] AI 솔루션 유지보수 (챗봇, 검색엔진)",
@@ -193,6 +197,7 @@ export const portfolioData: PortfolioData = {
         "transformers",
       ],
       imageUrl: "/portfolio/ichatV3_logo.jpg",
+      liveUrl: "https://www.wisenut.com/sub/ai/chatBot.php",
     },
     {
       title: "검색형 인공지능 개발 프로젝트 (howcan.ai)",
@@ -210,6 +215,7 @@ export const portfolioData: PortfolioData = {
         "/portfolio/howcanai1.png",
         "/portfolio/howcanai2.png",
       ],
+      githubUrl: "https://github.com/boostcampaitech5/level3_recsys_finalproject-recsys-11",
     },
   ],
 
@@ -238,8 +244,8 @@ export const portfolioData: PortfolioData = {
       skills: [
         { name: "Kubernetes", level: "Beginner" },
         { name: "Linux", level: "Intermediate" },
-        { name: "Git", level: "Advanced" },
-        { name: "GitLab", level: "Advanced" },
+        { name: "Git", level: "Intermediate" },
+        { name: "GitLab", level: "Intermediate" },
         { name: "GitHub", level: "Intermediate" },
         { name: "Docker", level: "Intermediate" },
         { name: "GitLab Runner", level: "Intermediate" },
@@ -248,11 +254,8 @@ export const portfolioData: PortfolioData = {
     {
       category: "Tools & Others",
       skills: [
-        { name: "Slack", level: "Intermediate" },
-        { name: "Notion", level: "Intermediate" },
-        { name: "Terminus", level: "Intermediate" },
-        { name: "DBeaver", level: "Intermediate" },
-        { name: "Postman", level: "Intermediate" },
+        { name: "Jira", level: "Intermediate" },
+        { name: "Confluence", level: "Intermediate" },
         { name: "VS Code", level: "Intermediate" },
         { name: "IntelliJ IDEA", level: "Intermediate" },
       ],

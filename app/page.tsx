@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import ExperienceCard from "@/components/experience-card";
 import { ModeToggle } from "@/components/mode-toggle";
 import ProjectCard from "@/components/project-card";
@@ -22,6 +23,7 @@ import {
   Phone,
 } from "lucide-react";
 import Link from "next/link";
+import { portfolioData } from "@/data/portfolio-data";
 
 function calculateExperienceDuration() {
   const start = new Date(2023, 9);
@@ -37,7 +39,46 @@ function calculateExperienceDuration() {
   }`;
 }
 
+function renderProjectDescription(descriptions: string[]) {
+  const [intro, ...items] = descriptions;
+  return (
+    <>
+      {intro}
+      {items.map((item, i) => {
+        const colonIdx = item.indexOf(": ");
+        return (
+          <Fragment key={i}>
+            <br />
+            {i + 1}.{" "}
+            {colonIdx !== -1 ? (
+              <>
+                <strong>{item.slice(0, colonIdx + 1)}</strong>
+                {item.slice(colonIdx + 1)}
+              </>
+            ) : (
+              item
+            )}
+          </Fragment>
+        );
+      })}
+    </>
+  );
+}
+
+function categoryToTabValue(category: string) {
+  return category.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+const tabsGridCols: Record<number, string> = {
+  1: "grid-cols-1",
+  2: "grid-cols-2",
+  3: "grid-cols-3",
+  4: "grid-cols-4",
+};
+
 export default function Home() {
+  const d = portfolioData;
+
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -116,21 +157,16 @@ export default function Home() {
         </div>
       </header>
       <main className="container py-8 md:py-12">
-        {/* Hero Section - Refactored without profile picture */}
+        {/* Hero Section */}
         <section className="py-16 md:py-20 lg:py-24 space-y-8">
           <div className="text-center space-y-8 animate-fade-in">
             <div className="space-y-6">
-              <div className="flex justify-center">
-                {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary">
-                  <Zap className="h-4 w-4" />
-                  <span className="text-sm font-medium">Available for new opportunities</span>
-                </div> */}
-              </div>
+              <div className="flex justify-center"></div>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight">
-                개발자 <span className="text-primary">강주형</span>입니다.
+                개발자 <span className="text-primary">{d.personal.name}</span>입니다.
               </h1>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-muted-foreground">
-                Software Engineer
+                {d.personal.title}
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed md:leading-loose">
                 {calculateExperienceDuration()}의 RAG, 챗봇 등 AI 솔루션 제품
@@ -158,7 +194,7 @@ export default function Home() {
             </div>
             <div className="flex flex-wrap gap-4 justify-center pt-6">
               <Link
-                href="https://github.com/gangjoohyeong"
+                href={d.personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -172,7 +208,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link
-                href="https://linkedin.com/in/gangjoohyeong"
+                href={d.personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -185,7 +221,7 @@ export default function Home() {
                   <span className="sr-only">LinkedIn</span>
                 </Button>
               </Link>
-              <Link href="mailto:bles@kakao.com">
+              <Link href={`mailto:${d.personal.email}`}>
                 <Button
                   variant="outline"
                   size="icon"
@@ -304,21 +340,9 @@ export default function Home() {
               <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
             </div>
             <div className="grid gap-6">
-              <ExperienceCard
-                title="연구원"
-                company="㈜와이즈넛"
-                location="경기도 성남시"
-                type="플랫폼 기술연구소 - AI어댑티브솔루션팀"
-                period="2023.10 - 현재"
-                description="AI 에이전트, RAG, 챗봇 등 AI 도메인 기반 제품 엔진 및 관리도구 연구 개발"
-                responsibilities={[
-                  "사내 플레이그라운드 개발 (k8s, Langflow)",
-                  "MCP 기반 에이전트 개발 (FastMCP, vLLM)",
-                  "LangGraph 기반 RAG 빌더 개발",
-                  "사내 솔루션 통합 관리도구 개발",
-                  "AI 솔루션(챗봇, 검색엔진) 유지보수",
-                ]}
-              />
+              {d.experiences.map((exp, i) => (
+                <ExperienceCard key={i} {...exp} />
+              ))}
             </div>
           </div>
         </section>
@@ -333,52 +357,36 @@ export default function Home() {
               <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
             </div>
             <div className="grid gap-6">
-              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                    <div>
-                      <CardTitle className="text-xl font-bold">
-                        동국대학교
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium mt-1">
-                        통계학과 & 데이터사이언스소프트웨어연계전공 (편입학,
-                        졸업)
-                      </CardDescription>
+              {d.academicBackground.map((edu, i) => (
+                <Card
+                  key={i}
+                  className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10"
+                >
+                  <CardHeader>
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                      <div>
+                        <CardTitle className="text-xl font-bold">
+                          {edu.title}
+                        </CardTitle>
+                        <CardDescription className="text-base font-medium mt-1">
+                          {edu.subtitle}
+                        </CardDescription>
+                      </div>
+                      <Badge className="w-fit mt-1 sm:mt-0">{edu.period}</Badge>
                     </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">2021 - 2023</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    GPA: 3.9/4.5
-                    <br />
-                    4학년 졸업
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                    <div>
-                      <CardTitle className="text-xl font-bold">
-                        안양대학교
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium mt-1">
-                        소프트웨어전공 (중퇴)
-                      </CardDescription>
-                    </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">2017 - 2021</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    GPA: 4.02/4.5
-                    <br />
-                    2학년 수료
-                  </p>
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {edu.details.map((detail, j) => (
+                        <Fragment key={j}>
+                          {j > 0 && <br />}
+                          {detail}
+                        </Fragment>
+                      ))}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -392,164 +400,19 @@ export default function Home() {
               </h2>
               <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
             </div>
-            {/* 1. 사내 플레이그라운드 개발 */}
-            <ProjectCard
-              title="[와이즈넛] 사내 플레이그라운드 개발"
-              period="2026.01 - 진행중"
-              description={
-                <>
-                  사내 연구소에서 AI Agent를 쉽게 구성 및 검증하고 사업부에
-                  배포할 수 있는 통합 환경 구축
-                  <br />
-                  1. <strong>Kubernetes 기반 인프라 구성:</strong> 사내 IDC 서버
-                  활용 kubeadm 기반 k8s 환경 구축
-                  <br />
-                  2. <strong>AI 에이전트 배포 환경:</strong> Langflow 커스텀 및
-                  사내 제품 노드 통합
-                </>
-              }
-              technologies={["Kubernetes", "Langflow"]}
-              imageUrl="/portfolio/playground1.png"
-              detailImages={["/portfolio/playground2.png"]}
-            />
-
-            {/* 2. MCP 기반 에이전트 개발 */}
-            <ProjectCard
-              title="[와이즈넛] MCP 기반 에이전트 개발"
-              period="2025.05 - 2025.12"
-              description={
-                <>
-                  LLM과 다양한 도구(Tool)를 표준화된 프로토콜(MCP)로 연결하는
-                  에이전트 시스템 개발
-                  <br />
-                  1. <strong>vLLM 서빙 연동:</strong> 오픈소스 32B 기반 파인튜닝
-                  모델 서빙
-                  <br />
-                  2. <strong>MCP Host(Client) 개발:</strong> FastMCP 기반 Tool
-                  Calling iteration 구현
-                  <br />
-                  3. <strong>MCP 서버 연동:</strong> 사내 검색엔진 솔루션 및 n8n
-                  등 연동
-                </>
-              }
-              technologies={["FastAPI", "FastMCP", "vLLM", "MCP"]}
-              imageUrl="/portfolio/lloa_logo.png"
-              detailImages={["/portfolio/lloa1.png", "/portfolio/lloa2.png"]}
-              liveUrl="https://www.wisenut.com/sub/AIAgent/Llm.php"
-            />
-
-            {/* 3. LangGraph 기반 RAG 빌더 개발 */}
-            <ProjectCard
-              title="[와이즈넛] LangGraph 기반 RAG 빌더 개발"
-              period="2025.01 - 2025.04"
-              description={
-                <>
-                  사용자가 RAG 파이프라인(Retriever, Reranker, LLM 등)을
-                  동적으로 구성할 수 있는 빌더 개발
-                  <br />
-                  1. <strong>동적 워크플로우 엔진:</strong> LangGraph 기반 노드
-                  실행 및 상태 관리
-                  <br />
-                  2. <strong>시각적 관리도구:</strong> Vueflow 기반 UI 및 백엔드
-                  연동
-                </>
-              }
-              technologies={[
-                "Python",
-                "FastAPI",
-                "LangGraph",
-                "TypeScript",
-                "Nuxt.js",
-                "Vueflow",
-              ]}
-              imageUrl="/portfolio/workflow1.png"
-            />
-
-            {/* 4. 사내 솔루션 관리도구 개발 */}
-            <ProjectCard
-              title="[와이즈넛] 사내 솔루션 관리도구 개발"
-              period="2024.07 - 2025.12"
-              description={
-                <>
-                  다양한 AI 솔루션(RAG, 챗봇 등)을 통합 관리하는 시스템 개발
-                  <br />
-                  1. <strong>RAG 관리도구 백엔드:</strong> 다중 DB 벤더(MySQL,
-                  Oracle, PostgreSQL 등) 지원
-                  <br />
-                  2. <strong>통합 관리도구:</strong> Spring Boot 인증 모듈 및
-                  React/Next.js 기반 통합 화면
-                  <br />
-                  3. <strong>DevOps:</strong> 사내 IDC 서버 및 GitLab CI 기반
-                  CI/CD 구성
-                </>
-              }
-              technologies={[
-                "Java",
-                "Spring Boot",
-                "JPA",
-                "Nuxt.js",
-                "React",
-                "Next.js",
-                "GitLab CI",
-              ]}
-              imageUrl="/portfolio/irag_logo.png"
-              liveUrl="https://www.wisenut.com/sub/rag/irag.php"
-            />
-
-            {/* 5. AI 솔루션 유지보수 */}
-            <ProjectCard
-              title="[와이즈넛] AI 솔루션 유지보수 (챗봇, 검색엔진)"
-              period="2023.10 - 2024.07"
-              description={
-                <>
-                  기존 납품된 AI 솔루션의 안정적인 운영 지원 및 커스터마이징
-                  <br />
-                  1. <strong>이슈 처리 및 커스텀:</strong> 고객사 요청사항 반영
-                  및 엔진 최적화
-                  <br />
-                  2. <strong>관리도구 개발:</strong> 레거시 웹 관리도구 관리 및
-                  커스텀
-                </>
-              }
-              technologies={[
-                "Java",
-                "Spring Boot",
-                "JSP",
-                "Thymeleaf",
-                "Python",
-                "transformers",
-              ]}
-              imageUrl="/portfolio/ichatV3_logo.jpg"
-              liveUrl="https://www.wisenut.com/sub/ai/chatBot.php"
-            />
-
-            {/* 6. howcan.ai */}
-            <ProjectCard
-              title="검색형 인공지능 개발 프로젝트 (howcan.ai)"
-              period="2023"
-              description={
-                <>
-                  부스트캠프 AI Tech 5기 최종 프로젝트
-                  <br />
-                  1. <strong>검색형 AI:</strong> 할루시네이션 최소화를 위한 RAG
-                  기반 Q&A 서비스
-                  <br />
-                  2. <strong>모델 서빙 및 백엔드:</strong> FastAPI/Transformers
-                  기반 서빙 서버 구축
-                  <br />
-                  3. <strong>데이터셋 구축:</strong> Polyglot-ko, koBART 기반
-                  파인튜닝 데이터 구성
-                </>
-              }
-              technologies={["FastAPI", "SQLAlchemy", "PostgreSQL", "OpenAI"]}
-              imageUrl="/portfolio/howcanai_logo.png"
-              detailImages={[
-                "/portfolio/howcanai_flow.png",
-                "/portfolio/howcanai1.png",
-                "/portfolio/howcanai2.png",
-              ]}
-              githubUrl="https://github.com/boostcampaitech5/level3_recsys_finalproject-recsys-11"
-            />
+            {d.projects.map((proj, i) => (
+              <ProjectCard
+                key={i}
+                title={proj.title}
+                period={proj.period}
+                description={renderProjectDescription(proj.descriptions)}
+                technologies={proj.technologies}
+                imageUrl={proj.imageUrl ?? "/placeholder.svg"}
+                detailImages={proj.detailImages}
+                githubUrl={proj.githubUrl}
+                liveUrl={proj.liveUrl}
+              />
+            ))}
           </div>
         </section>
 
@@ -564,70 +427,40 @@ export default function Home() {
             </div>
             <Card className="shadow-sm border-primary/10">
               <CardContent className="p-6">
-                <Tabs defaultValue="backend" className="w-full">
-                  <TabsList className="grid w-full grid-cols-4">
-                    <TabsTrigger value="backend">AI & Backend</TabsTrigger>
-                    <TabsTrigger value="database">Database</TabsTrigger>
-                    <TabsTrigger value="infrastructure">
-                      Infrastructure
-                    </TabsTrigger>
-                    <TabsTrigger value="tools">Tools</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="backend" className="mt-6 space-y-4">
-                    <h3 className="text-xl font-semibold">
-                      AI & Backend 기술 스택
-                    </h3>
-                    <div className="flex flex-wrap gap-3 mt-2">
-                      <SkillBadge
-                        name="Python (FastAPI)"
-                        level="Intermediate"
-                      />
-                      <SkillBadge
-                        name="Java (Spring boot)"
-                        level="Intermediate"
-                      />
-                      <SkillBadge name="MCP" level="Intermediate" />
-                      <SkillBadge name="LangGraph" level="Intermediate" />
-                      <SkillBadge name="Langflow" level="Intermediate" />
-                      <SkillBadge name="vLLM" level="Beginner" />
-                    </div>
-                  </TabsContent>
-                  <TabsContent value="database" className="mt-6 space-y-4">
-                    <h3 className="text-xl font-semibold">
-                      Database 기술 스택
-                    </h3>
-                    <div className="flex flex-wrap gap-3 mt-2">
-                      <SkillBadge name="PostgreSQL" level="Intermediate" />
-                      <SkillBadge name="SQLAlchemy" level="Intermediate" />
-                      <SkillBadge name="JPA" level="Intermediate" />
-                    </div>
-                  </TabsContent>
-                  <TabsContent
-                    value="infrastructure"
-                    className="mt-6 space-y-4"
+                <Tabs
+                  defaultValue={categoryToTabValue(d.skillCategories[0].category)}
+                  className="w-full"
+                >
+                  <TabsList
+                    className={`grid w-full ${tabsGridCols[d.skillCategories.length] ?? "grid-cols-4"}`}
                   >
-                    <h3 className="text-xl font-semibold">
-                      Infrastructure (DevOps)
-                    </h3>
-                    <div className="flex flex-wrap gap-3 mt-2">
-                      <SkillBadge name="Kubernetes" level="Beginner" />
-                      <SkillBadge name="Linux" level="Intermediate" />
-                      <SkillBadge name="Git" level="Intermediate" />
-                      <SkillBadge name="GitLab" level="Intermediate" />
-                      <SkillBadge name="GitHub" level="Intermediate" />
-                      <SkillBadge name="Docker" level="Intermediate" />
-                      <SkillBadge name="GitLab Runner" level="Intermediate" />
-                    </div>
-                  </TabsContent>
-                  <TabsContent value="tools" className="mt-6 space-y-4">
-                    <h3 className="text-xl font-semibold">Tools & Others</h3>
-                    <div className="flex flex-wrap gap-3 mt-2">
-                      <SkillBadge name="Jira" level="Intermediate" />
-                      <SkillBadge name="Confluence" level="Intermediate" />
-                      <SkillBadge name="VS Code" level="Intermediate" />
-                      <SkillBadge name="Intellij IDEA" level="Intermediate" />
-                    </div>
-                  </TabsContent>
+                    {d.skillCategories.map((cat) => (
+                      <TabsTrigger
+                        key={cat.category}
+                        value={categoryToTabValue(cat.category)}
+                      >
+                        {cat.category.replace(" (DevOps)", "")}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                  {d.skillCategories.map((cat) => (
+                    <TabsContent
+                      key={cat.category}
+                      value={categoryToTabValue(cat.category)}
+                      className="mt-6 space-y-4"
+                    >
+                      <h3 className="text-xl font-semibold">{cat.category} 기술 스택</h3>
+                      <div className="flex flex-wrap gap-3 mt-2">
+                        {cat.skills.map((skill) => (
+                          <SkillBadge
+                            key={skill.name}
+                            name={skill.name}
+                            level={skill.level}
+                          />
+                        ))}
+                      </div>
+                    </TabsContent>
+                  ))}
                 </Tabs>
               </CardContent>
             </Card>
@@ -644,71 +477,36 @@ export default function Home() {
               <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
             </div>
             <div className="grid gap-6">
-              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                    <div>
-                      <CardTitle className="text-xl font-bold">
-                        부스트캠프 AI Tech
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium mt-1">
-                        부스트캠프 AI Tech 5기 (수료)
-                      </CardDescription>
+              {d.activities.map((act, i) => (
+                <Card
+                  key={i}
+                  className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10"
+                >
+                  <CardHeader>
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                      <div>
+                        <CardTitle className="text-xl font-bold">
+                          {act.title}
+                        </CardTitle>
+                        <CardDescription className="text-base font-medium mt-1">
+                          {act.subtitle}
+                        </CardDescription>
+                      </div>
+                      <Badge className="w-fit mt-1 sm:mt-0">{act.period}</Badge>
                     </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">2023</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    네이버 커넥트재단 주관
-                    <br />
-                    RecSys(추천 시스템) 트랙
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                    <div>
-                      <CardTitle className="text-xl font-bold">
-                        2022 데이터 크리에이터 캠프
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium mt-1">
-                        우수상 수상
-                      </CardDescription>
-                    </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">2022</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    한국지능정보사회진흥원 주관
-                    <br />
-                    다중 이미지 분류 딥러닝 해커톤
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                    <div>
-                      <CardTitle className="text-xl font-bold">
-                        제7기 대학생 통계교육 재능기부단
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium mt-1">
-                        통계청 통계교육원
-                      </CardDescription>
-                    </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">2021.12</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    통계 관련 교육 봉사 활동 수료
-                  </p>
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {act.details.map((detail, j) => (
+                        <Fragment key={j}>
+                          {j > 0 && <br />}
+                          {detail}
+                        </Fragment>
+                      ))}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -723,88 +521,26 @@ export default function Home() {
               <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
             </div>
             <div className="grid gap-6">
-              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                    <div>
-                      <CardTitle className="text-xl font-bold">
-                        정보처리기사
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium mt-1">
-                        한국산업인력공단
-                      </CardDescription>
+              {d.certificates.map((cert, i) => (
+                <Card
+                  key={i}
+                  className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10"
+                >
+                  <CardHeader>
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                      <div>
+                        <CardTitle className="text-xl font-bold">
+                          {cert.title}
+                        </CardTitle>
+                        <CardDescription className="text-base font-medium mt-1">
+                          {cert.issuer}
+                        </CardDescription>
+                      </div>
+                      <Badge className="w-fit mt-1 sm:mt-0">{cert.acquired}</Badge>
                     </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">영구</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    취득: 2024.09
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                    <div>
-                      <CardTitle className="text-xl font-bold">
-                        빅데이터분석기사
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium mt-1">
-                        한국데이터산업진흥원
-                      </CardDescription>
-                    </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">영구</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    취득: 2022.07
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                    <div>
-                      <CardTitle className="text-xl font-bold">
-                        SQL 개발자 (SQLD)
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium mt-1">
-                        한국데이터산업진흥원
-                      </CardDescription>
-                    </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">영구</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    취득: 2021.12
-                  </p>
-                </CardContent>
-              </Card>
-              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                    <div>
-                      <CardTitle className="text-xl font-bold">
-                        데이터분석 준전문가 (ADsP)
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium mt-1">
-                        한국데이터산업진흥원
-                      </CardDescription>
-                    </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">영구</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    취득: 2021.09
-                  </p>
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -836,7 +572,7 @@ export default function Home() {
                     <div>
                       <p className="font-semibold text-base">이메일</p>
                       <p className="text-sm text-muted-foreground">
-                        bles@kakao.com
+                        {d.personal.email}
                       </p>
                     </div>
                   </div>
@@ -851,7 +587,7 @@ export default function Home() {
                     <div>
                       <p className="font-semibold text-base">휴대전화</p>
                       <p className="text-sm text-muted-foreground">
-                        +821026074948
+                        {d.personal.phone}
                       </p>
                     </div>
                   </div>
@@ -866,7 +602,7 @@ export default function Home() {
                     <div>
                       <p className="font-semibold text-base">지역</p>
                       <p className="text-sm text-muted-foreground">
-                        경기도 성남시
+                        {d.personal.location}
                       </p>
                     </div>
                   </div>
@@ -874,7 +610,7 @@ export default function Home() {
                     <p className="font-semibold text-base mb-3">소셜 프로필</p>
                     <div className="flex gap-3">
                       <Link
-                        href="https://github.com/gangjoohyeong"
+                        href={d.personal.github}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -888,7 +624,7 @@ export default function Home() {
                         </Button>
                       </Link>
                       <Link
-                        href="https://linkedin.com/in/gangjoohyeong"
+                        href={d.personal.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -971,22 +707,8 @@ export default function Home() {
       <footer className="border-t py-6 md:py-8 bg-muted/30">
         <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-center text-sm text-muted-foreground md:text-left">
-            &copy; {new Date().getFullYear()} 강주형. All rights reserved.
+            &copy; {new Date().getFullYear()} {d.personal.name}. All rights reserved.
           </p>
-          {/* <div className="flex gap-4">
-            <Link
-              href="#"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="#"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              Terms of Service
-            </Link>
-          </div> */}
         </div>
       </footer>
     </div>
