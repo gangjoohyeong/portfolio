@@ -1,0 +1,307 @@
+/* PDF/인쇄용 스타일 */
+@media print {
+  /* 페이지 설정 */
+  @page {
+    size: A4 portrait;
+    margin: 1.5cm 1.5cm 2cm 1.5cm;
+  }
+
+  /* 기본 설정 */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  body {
+    font-size: 10pt;
+    line-height: 1.4;
+  }
+
+  /* 숨길 요소들 */
+  header,
+  .mode-toggle,
+  button:not(.no-print-hide),
+  nav,
+  form,
+  footer,
+  .sr-only,
+  [class*="hover:"],
+  [class*="transition"] {
+    display: none !important;
+  }
+
+  /* Hero 섹션 숨기기 (소개 섹션과 중복) */
+  main > section:first-child {
+    display: none !important;
+  }
+
+  /* 메인 컨테이너 */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 섹션 스타일 */
+  section {
+    page-break-inside: avoid;
+    margin-bottom: 1.5rem !important;
+    padding: 0 !important;
+  }
+
+  section h2 {
+    font-size: 16pt;
+    font-weight: 700;
+    margin-bottom: 0.75rem !important;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.25rem;
+    page-break-after: avoid;
+  }
+
+  /* 소개 섹션 */
+  #about {
+    page-break-before: auto;
+    margin-bottom: 1rem !important;
+  }
+
+  #about p {
+    font-size: 9.5pt;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #about .text-xl {
+    font-size: 11pt !important;
+    font-weight: 600;
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* 경력 섹션 */
+  #experience .grid {
+    gap: 0.75rem !important;
+  }
+
+  /* 프로젝트 섹션 */
+  #projects {
+    page-break-before: always;
+  }
+
+  #projects > div > div {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  /* 프로젝트 카드 */
+  [class*="Card"] {
+    page-break-inside: avoid;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    margin-bottom: 0.75rem !important;
+    padding: 0.75rem !important;
+  }
+
+  [class*="CardHeader"] {
+    padding: 0 0 0.5rem 0 !important;
+  }
+
+  [class*="CardTitle"] {
+    font-size: 11pt !important;
+    font-weight: 600;
+    margin-bottom: 0.25rem !important;
+  }
+
+  [class*="CardDescription"] {
+    font-size: 8.5pt !important;
+    margin-top: 0.15rem !important;
+  }
+
+  [class*="CardContent"] {
+    padding: 0.5rem 0 0 0 !important;
+    font-size: 9pt;
+  }
+
+  /* 프로젝트 이미지 */
+  [class*="Card"] img,
+  [class*="Card"] [class*="relative"] {
+    display: none !important;
+  }
+
+  /* Badge */
+  [class*="Badge"],
+  .badge {
+    font-size: 7.5pt !important;
+    padding: 0.1rem 0.4rem !important;
+    border: 1px solid #666 !important;
+    background: #f0f0f0 !important;
+    color: #333 !important;
+    border-radius: 0.25rem;
+    display: inline-block;
+    margin: 0.1rem;
+  }
+
+  /* 기술 스택 */
+  #skills [class*="Tabs"] {
+    display: block !important;
+  }
+
+  #skills [class*="TabsList"] {
+    display: none !important;
+  }
+
+  #skills [class*="TabsContent"] {
+    display: block !important;
+    margin-top: 0.5rem !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  #skills [class*="TabsContent"] h3 {
+    font-size: 10pt;
+    font-weight: 600;
+    margin-bottom: 0.5rem !important;
+    margin-top: 0.75rem !important;
+  }
+
+  #skills .flex-wrap {
+    gap: 0.25rem !important;
+  }
+
+  /* 학력사항 섹션 */
+  #academic .grid {
+    gap: 0.5rem !important;
+  }
+
+  #academic [class*="Card"] {
+    padding: 0.5rem !important;
+  }
+
+  /* 자격증 섹션 */
+  #certificates {
+    page-break-before: always;
+  }
+
+  #certificates .grid {
+    gap: 0.5rem !important;
+  }
+
+  #certificates [class*="Card"] {
+    padding: 0.5rem !important;
+  }
+
+  /* 연락처 섹션 */
+  #contact {
+    page-break-before: auto;
+  }
+
+  #contact .grid {
+    display: block !important;
+  }
+
+  #contact [class*="Card"]:last-child {
+    display: none !important;
+  }
+
+  #contact [class*="CardContent"] {
+    padding: 0.5rem 0 !important;
+  }
+
+  #contact .space-y-6 > div {
+    margin-bottom: 0.5rem !important;
+    page-break-inside: avoid;
+  }
+
+  #contact .font-semibold {
+    font-size: 9pt;
+  }
+
+  #contact .text-sm {
+    font-size: 8.5pt;
+  }
+
+  /* 링크 스타일 */
+  a {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 7.5pt;
+    color: #666;
+  }
+
+  a[href^="mailto"]::after,
+  a[href^="#"]::after {
+    content: "";
+  }
+
+  /* 리스트 */
+  ul {
+    margin: 0.5rem 0 !important;
+    padding-left: 1.25rem !important;
+  }
+
+  li {
+    margin-bottom: 0.25rem !important;
+    font-size: 9pt;
+    line-height: 1.4;
+  }
+
+  /* 그라데이션 제거 */
+  [class*="gradient"] {
+    display: none !important;
+  }
+
+  /* 공간 조정 */
+  .space-y-6 > * + *,
+  .space-y-5 > * + *,
+  .space-y-4 > * + * {
+    margin-top: 0.5rem !important;
+  }
+
+  /* Flex 레이아웃 조정 */
+  .flex {
+    display: flex !important;
+  }
+
+  .flex-wrap {
+    flex-wrap: wrap !important;
+  }
+
+  .gap-3,
+  .gap-4 {
+    gap: 0.4rem !important;
+  }
+
+  /* 프로젝트 설명 */
+  #projects [class*="line-clamp"] {
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  /* 강조 텍스트 */
+  strong {
+    font-weight: 600;
+  }
+
+  /* 페이지 구분 최적화 */
+  .page-break-before {
+    page-break-before: always;
+  }
+
+  .page-break-after {
+    page-break-after: always;
+  }
+
+  .page-break-avoid {
+    page-break-inside: avoid;
+  }
+}

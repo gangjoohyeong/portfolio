@@ -66,6 +66,12 @@ export default function Home() {
               경력
             </Link>
             <Link
+              href="#academic"
+              className="text-sm font-medium transition-colors hover:text-primary"
+            >
+              학력사항
+            </Link>
+            <Link
               href="#projects"
               className="text-sm font-medium transition-colors hover:text-primary"
             >
@@ -78,10 +84,10 @@ export default function Home() {
               활용 기술
             </Link>
             <Link
-              href="#education"
+              href="#activities"
               className="text-sm font-medium transition-colors hover:text-primary"
             >
-              교육
+              대외활동
             </Link>
             <Link
               href="#certificates"
@@ -317,6 +323,66 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Academic Background Section */}
+        <section id="academic" className="py-12 scroll-mt-20">
+          <div className="space-y-6">
+            <div className="flex items-center space-x-4">
+              <h2 className="text-3xl font-extrabold tracking-tight">
+                학력사항
+              </h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
+            </div>
+            <div className="grid gap-6">
+              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
+                <CardHeader>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                    <div>
+                      <CardTitle className="text-xl font-bold">
+                        동국대학교
+                      </CardTitle>
+                      <CardDescription className="text-base font-medium mt-1">
+                        통계학과 & 데이터사이언스소프트웨어연계전공 (편입학,
+                        졸업)
+                      </CardDescription>
+                    </div>
+                    <Badge className="w-fit mt-1 sm:mt-0">2021 - 2023</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    GPA: 3.9/4.5
+                    <br />
+                    4학년 졸업
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
+                <CardHeader>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                    <div>
+                      <CardTitle className="text-xl font-bold">
+                        안양대학교
+                      </CardTitle>
+                      <CardDescription className="text-base font-medium mt-1">
+                        소프트웨어전공 (중퇴)
+                      </CardDescription>
+                    </div>
+                    <Badge className="w-fit mt-1 sm:mt-0">2017 - 2021</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    GPA: 4.02/4.5
+                    <br />
+                    2학년 수료
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
         {/* Projects Section */}
         <section id="projects" className="py-12 scroll-mt-20">
           <div className="space-y-6">
@@ -546,8 +612,8 @@ export default function Home() {
                     <div className="flex flex-wrap gap-3 mt-2">
                       <SkillBadge name="Kubernetes" level="Beginner" />
                       <SkillBadge name="Linux" level="Intermediate" />
-                      <SkillBadge name="Git" level="Advanced" />
-                      <SkillBadge name="GitLab" level="Advanced" />
+                      <SkillBadge name="Git" level="Intermediate" />
+                      <SkillBadge name="GitLab" level="Intermediate" />
                       <SkillBadge name="GitHub" level="Intermediate" />
                       <SkillBadge name="Docker" level="Intermediate" />
                       <SkillBadge name="GitLab Runner" level="Intermediate" />
@@ -556,11 +622,8 @@ export default function Home() {
                   <TabsContent value="tools" className="mt-6 space-y-4">
                     <h3 className="text-xl font-semibold">Tools & Others</h3>
                     <div className="flex flex-wrap gap-3 mt-2">
-                      <SkillBadge name="Slack" level="Intermediate" />
-                      <SkillBadge name="Notion" level="Intermediate" />
-                      <SkillBadge name="Terminus" level="Intermediate" />
-                      <SkillBadge name="DBeaver" level="Intermediate" />
-                      <SkillBadge name="Postman" level="Intermediate" />
+                      <SkillBadge name="Jira" level="Intermediate" />
+                      <SkillBadge name="Confluence" level="Intermediate" />
                       <SkillBadge name="VS Code" level="Intermediate" />
                       <SkillBadge name="Intellij IDEA" level="Intermediate" />
                     </div>
@@ -571,11 +634,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Education Section */}
-        <section id="education" className="py-12 scroll-mt-20">
+        {/* Activities Section */}
+        <section id="activities" className="py-12 scroll-mt-20">
           <div className="space-y-6">
             <div className="flex items-center space-x-4">
-              <h2 className="text-3xl font-extrabold tracking-tight">교육</h2>
+              <h2 className="text-3xl font-extrabold tracking-tight">
+                대외활동
+              </h2>
               <div className="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent"></div>
             </div>
             <div className="grid gap-6">
@@ -641,53 +706,6 @@ export default function Home() {
                 <CardContent>
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     통계 관련 교육 봉사 활동 수료
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                    <div>
-                      <CardTitle className="text-xl font-bold">
-                        동국대학교
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium mt-1">
-                        통계학과 & 데이터사이언스소프트웨어연계전공 (편입학,
-                        졸업)
-                      </CardDescription>
-                    </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">2021 - 2023</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    GPA: 3.9/4.5
-                    <br />
-                    4학년 졸업
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-sm transition-transform duration-300 hover:shadow-md hover:-translate-y-1 border-primary/10">
-                <CardHeader>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                    <div>
-                      <CardTitle className="text-xl font-bold">
-                        안양대학교
-                      </CardTitle>
-                      <CardDescription className="text-base font-medium mt-1">
-                        소프트웨어전공 (중퇴)
-                      </CardDescription>
-                    </div>
-                    <Badge className="w-fit mt-1 sm:mt-0">2017 - 2021</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    GPA: 4.02/4.5
-                    <br />
-                    2학년 수료
                   </p>
                 </CardContent>
               </Card>

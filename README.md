@@ -19,6 +19,38 @@ pnpm install
 pnpm dev
 ```
 
+## PDF 이력서 생성
+
+포트폴리오 웹페이지를 PDF 형식의 이력서로 자동 변환할 수 있습니다.
+
+```bash
+# 방법 1: 개발 서버가 이미 실행 중인 경우
+pnpm generate-pdf
+
+# 방법 2: 개발 서버 자동 시작 + PDF 생성
+pnpm pdf
+```
+
+생성된 PDF는 다음 위치에 저장됩니다:
+- `public/portfolio/resume.pdf` - 최신 버전
+- `public/portfolio/resume_YYYY-MM-DD.pdf` - 날짜별 백업
+
+### PDF 커스터마이징
+
+PDF 스타일을 수정하려면 [app/print.css](app/print.css) 파일을 편집하세요.
+
+```css
+/* 예: 페이지 여백 조정 */
+@page {
+  margin: 2cm 2cm 2.5cm 2cm;
+}
+
+/* 예: 폰트 크기 조정 */
+body {
+  font-size: 11pt;
+}
+```
+
 ## 빌드
 
 ```bash
@@ -48,24 +80,32 @@ pnpm gh-deploy
 
 ## 주요 스크립트 요약
 
-| 명령어           | 설명                     |
-| ---------------- | ------------------------ |
-| `pnpm dev`       | 개발 서버 실행           |
-| `pnpm build`     | 프로덕션 빌드            |
-| `pnpm start`     | 빌드된 앱 로컬 서빙      |
-| `pnpm lint`      | ESLint 실행              |
-| `pnpm gh-deploy` | 빌드 + GitHub Pages 배포 |
+| 명령어              | 설명                               |
+| ------------------- | ---------------------------------- |
+| `pnpm dev`          | 개발 서버 실행                     |
+| `pnpm build`        | 프로덕션 빌드                      |
+| `pnpm start`        | 빌드된 앱 로컬 서빙                |
+| `pnpm lint`         | ESLint 실행                        |
+| `pnpm gh-deploy`    | 빌드 + GitHub Pages 배포           |
+| `pnpm pdf`          | 개발 서버 시작 + PDF 이력서 생성   |
+| `pnpm generate-pdf` | PDF 이력서 생성 (서버 실행 중일 때) |
 
 ## 프로젝트 구조
 
 ```
 portfolio/
 ├── app/              # Next.js App Router 페이지
+│   ├── print.css     # PDF/인쇄용 스타일
+│   └── globals.css   # 글로벌 CSS
 ├── components/       # React 컴포넌트 (shadcn/ui 포함)
+├── data/             # 포트폴리오 데이터 (선택사항)
 ├── hooks/            # 커스텀 React 훅
 ├── lib/              # 유틸리티 함수
 ├── public/           # 정적 파일
-├── styles/           # 글로벌 CSS
+│   └── portfolio/    # 이미지 및 생성된 PDF
+├── scripts/          # 자동화 스크립트
+│   └── generate-pdf.ts # PDF 생성 스크립트
+├── styles/           # 추가 CSS 파일
 ├── out/              # 빌드 결과물 (git에서 무시됨)
 ├── .npmrc            # pnpm 설정
 ├── next.config.mjs   # Next.js 설정
