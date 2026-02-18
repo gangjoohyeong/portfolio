@@ -163,7 +163,8 @@ export default function Home() {
             <div className="space-y-6">
               <div className="flex justify-center"></div>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight">
-                개발자 <span className="text-primary">{d.personal.name}</span>입니다.
+                개발자 <span className="text-primary">{d.personal.name}</span>
+                입니다.
               </h1>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-muted-foreground">
                 {d.personal.title}
@@ -253,31 +254,26 @@ export default function Home() {
 
                 <div className="space-y-5 text-base md:text-lg leading-relaxed md:leading-loose text-card-foreground/90">
                   <p>
-                    최근에는 <strong>MCP(Model Context Protocol)</strong> 기반의
-                    AI 에이전트 개발과 <strong>Kubernetes</strong> 기반의 인프라
-                    구축에 집중하고 있습니다. 초기에는 챗봇 솔루션의 유지보수와
-                    고객사 맞춤형 커스터마이징을 담당하며 현장의 다양한
-                    요구사항을 이해하는 법을 배웠습니다. 이후 RAG 솔루션 개발로
-                    영역을 확장하면서, 다양한 환경에서 안정적으로 동작하는 AI
-                    솔루션 백엔드를 구축하는 경험을 쌓았습니다.
+                    최근에는 MCP를 활용한 AI 에이전트 개발과 더불어, 이를
+                    효율적으로 배포할 수 있는 Kubernetes 환경 위에 Langflow
+                    기반의 플레이그라운드를 구축하는 데 집중하고 있습니다.
                   </p>
 
                   <p>
-                    현재는 사내 플레이그라운드를 구축하여 Langflow 기반의 AI
-                    에이전트를 쉽게 배포하고 테스트할 수 있는 환경을 만들고
-                    있습니다. 또한, LLM을 활용한 다양한 도구(Tool)들을 연결하는
-                    MCP 서버 및 호스트 개발을 통해 AI 에이전트의 확장성을 높이는
-                    연구를 진행 중입니다.
+                    이전에는 AI 도메인 솔루션의 개발 및 유지보수를 수행하며
+                    탄탄한 기술적 기반을 쌓았습니다. 주로 Java/Spring과
+                    Python/FastAPI를 활용해 서버를 구축했으며, 프론트엔드는
+                    AI-driven 개발을 통해 React/Next.js 기반의 화면을 빠르게
+                    프로토타이핑하고 완성도 있게 구현했습니다.
                   </p>
 
                   <p>
-                    업무 시간 외에도 최신 AI 동향을 꾸준히 탐색해 팀원들과
-                    활발히 공유하고, <br />
+                    최신 AI 동향을 꾸준히 탐색해 팀원들과 활발히 공유하고,
                     실무에 적용 가치가 있는 기술은 선별해 적극적으로 도입을
                     검토합니다.
                   </p>
                   <p>
-                    프론트엔드 개발은 아직 성숙하지 않아서, 이 페이지는{" "}
+                    이 페이지는{" "}
                     <a
                       href="https://v0.app"
                       target="_blank"
@@ -428,7 +424,9 @@ export default function Home() {
             <Card className="shadow-sm border-primary/10">
               <CardContent className="p-6">
                 <Tabs
-                  defaultValue={categoryToTabValue(d.skillCategories[0].category)}
+                  defaultValue={categoryToTabValue(
+                    d.skillCategories[0].category,
+                  )}
                   className="w-full"
                 >
                   <TabsList
@@ -449,7 +447,9 @@ export default function Home() {
                       value={categoryToTabValue(cat.category)}
                       className="mt-6 space-y-4"
                     >
-                      <h3 className="text-xl font-semibold">{cat.category} 기술 스택</h3>
+                      <h3 className="text-xl font-semibold">
+                        {cat.category} 기술 스택
+                      </h3>
                       <div className="flex flex-wrap gap-3 mt-2">
                         {cat.skills.map((skill) => (
                           <SkillBadge
@@ -536,7 +536,9 @@ export default function Home() {
                           {cert.issuer}
                         </CardDescription>
                       </div>
-                      <Badge className="w-fit mt-1 sm:mt-0">{cert.acquired}</Badge>
+                      <Badge className="w-fit mt-1 sm:mt-0">
+                        {cert.acquired}
+                      </Badge>
                     </div>
                   </CardHeader>
                 </Card>
@@ -707,7 +709,8 @@ export default function Home() {
       <footer className="border-t py-6 md:py-8 bg-muted/30">
         <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-center text-sm text-muted-foreground md:text-left">
-            &copy; {new Date().getFullYear()} {d.personal.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {d.personal.name}. All rights
+            reserved.
           </p>
         </div>
       </footer>
