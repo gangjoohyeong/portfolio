@@ -1,0 +1,38 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+!.env.example
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# 내보내기용 PDF(public/resume.pdf, public/portfolio.pdf)는 다운로드 대상이라
+# 커밋·배포에 포함합니다. 콘텐츠 변경 후 `pnpm pdf` 로 재생성하고 커밋하세요.
+
+# editor / 로컬 에이전트 도구 (impeccable 스킬·미리보기 설정 등 — 저장소엔 미포함)
+.vscode/*
+!.vscode/extensions.json
+.idea
+/.claude/

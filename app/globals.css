@@ -1,0 +1,231 @@
+/* =============================================================================
+   글로벌 스타일 — HeroUI v3 + Tailwind CSS v4
+   설계 원칙은 DESIGN.md / PRODUCT.md 참고. 타이포와 여백이 위계를 만들고,
+   색은 절제하되 액센트 한 가지에 확실히 커밋합니다.
+   ============================================================================= */
+
+@import "tailwindcss";
+@import "@heroui/styles";
+
+/* next-themes 가 html 에 .dark 클래스를 토글합니다. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* -----------------------------------------------------------------------------
+   팔레트 — 따뜻한 중성 캔버스 + 단일 클레이(cinnabar) 액센트 (OKLCH, 항상 틴트)
+   HeroUI 토큰을 덮어쓰는 방식이라 컴포넌트는 그대로 두고 색만 바뀝니다.
+   ----------------------------------------------------------------------------- */
+:root,
+[data-theme="light"],
+[data-theme="default"] {
+  --background: oklch(0.981 0.006 75);
+  --foreground: oklch(0.24 0.012 55);
+  --surface: oklch(0.997 0.003 80);
+  --surface-foreground: oklch(0.24 0.012 55);
+  --surface-secondary: oklch(0.967 0.006 75);
+  --surface-tertiary: oklch(0.952 0.007 75);
+  --surface-hover: oklch(0.955 0.007 75);
+  --muted: oklch(0.474 0.014 55);
+  --default: oklch(0.948 0.006 75);
+  --default-foreground: oklch(0.3 0.012 55);
+  --border: oklch(0.9 0.008 75);
+  --separator: oklch(0.92 0.006 75);
+  --accent: oklch(0.575 0.16 42);
+  --accent-foreground: oklch(0.99 0.01 80);
+  --link: var(--foreground);
+}
+
+.dark,
+[data-theme="dark"] {
+  --background: oklch(0.19 0.011 55);
+  --foreground: oklch(0.93 0.008 80);
+  --surface: oklch(0.231 0.012 55);
+  --surface-foreground: oklch(0.93 0.008 80);
+  --surface-secondary: oklch(0.258 0.013 55);
+  --surface-tertiary: oklch(0.29 0.013 55);
+  --surface-hover: oklch(0.3 0.014 55);
+  --muted: oklch(0.715 0.016 70);
+  --default: oklch(0.3 0.012 55);
+  --default-foreground: oklch(0.93 0.008 80);
+  --border: oklch(0.32 0.012 55);
+  --separator: oklch(0.28 0.012 55);
+  --accent: oklch(0.7 0.152 46);
+  --accent-foreground: oklch(0.18 0.02 50);
+  --link: var(--foreground);
+}
+
+/* -----------------------------------------------------------------------------
+   폰트 — 단일 패밀리(Pretendard)에 굵기·크기 대비로 위계 (mono 는 코드/수치용 보조)
+   ----------------------------------------------------------------------------- */
+@theme inline {
+  --font-sans:
+    "Pretendard Variable", Pretendard, ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+}
+
+/* -----------------------------------------------------------------------------
+   베이스
+   ----------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--background);
+    color: var(--foreground);
+    font-kerning: normal;
+  }
+
+  /* 제목은 줄을 고르게, 본문은 고아줄 방지 */
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
+  /* 라이트-온-다크 보정: 밝은 글자는 더 가벼워 보여 약간의 여유를 줍니다 */
+  .dark p {
+    letter-spacing: 0.006em;
+  }
+
+  :where(section[id]) {
+    scroll-margin-top: 4.5rem;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   컴포넌트 유틸 — HeroUI Button 은 <a> 로 렌더 불가하여 링크형 버튼만 별도 제공
+   ----------------------------------------------------------------------------- */
+@layer components {
+  .btn {
+    @apply inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-[var(--radius-xl)] font-semibold whitespace-nowrap select-none;
+    transition:
+      transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.2s,
+      border-color 0.2s;
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .btn-md {
+    @apply h-11 px-5 text-sm;
+  }
+  .btn-lg {
+    @apply h-12 px-6 text-[0.95rem];
+  }
+  .btn-primary {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+  }
+  .btn-primary:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+  }
+  .btn-outline {
+    border: 1px solid var(--border);
+    background-color: transparent;
+    color: var(--foreground);
+  }
+  .btn-outline:hover {
+    background-color: var(--surface-hover);
+    border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
+    transform: translateY(-2px);
+  }
+  .btn-ghost {
+    color: var(--foreground);
+  }
+  .btn-ghost:hover {
+    background-color: var(--surface-hover);
+  }
+
+  /* 아이콘 버튼 (44px 터치 타깃 보장) */
+  .icon-btn {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full;
+    border: 1px solid var(--border);
+    background-color: transparent;
+    color: var(--foreground);
+    transition:
+      transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.2s,
+      border-color 0.2s;
+  }
+  .icon-btn:hover {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* 본문 측정폭 (45–75ch) */
+  .measure {
+    max-width: 68ch;
+  }
+
+  /* HeroUI Chip 기본 상하 패딩(2px)이 좁아 글자가 경계에 붙음 → 여유 확보 */
+  .chip {
+    padding-block: 0.4375rem;
+    line-height: 1.2;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   모션 — 기본은 항상 가시 상태. 애니메이션은 향상일 뿐이며, 미지원/감속 환경에서는
+   콘텐츠가 그대로 보입니다(빈 화면 방지). 스크롤 등장은 scroll-driven timeline 사용.
+   ----------------------------------------------------------------------------- */
+@layer utilities {
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-rise {
+      animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .animate-rise-1 {
+      animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.06s both;
+    }
+    .animate-rise-2 {
+      animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+    }
+    .animate-rise-3 {
+      animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+    }
+
+    /* 스크롤 등장: 지원 브라우저에서만. 미지원 시 .reveal 은 평범히 보입니다. */
+    @supports (animation-timeline: view()) {
+      .reveal {
+        animation: rise linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 18%;
+      }
+    }
+  }
+}
