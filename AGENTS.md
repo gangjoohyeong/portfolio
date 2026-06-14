@@ -20,7 +20,6 @@
 | `pnpm format` / `pnpm format:check`    | Prettier                                                    |
 | `pnpm pdf`                             | dev 서버 자동 실행 + 이력서/포트폴리오 PDF 생성             |
 | `pnpm export:pdf[:resume\|:portfolio]` | (서버 실행 중) PDF 생성 → `public/*.pdf`                    |
-| `pnpm gh-deploy`                       | 빌드 + gh-pages 브랜치 수동 배포                            |
 
 변경 후에는 `pnpm lint && pnpm format && pnpm build`로 검증하세요.
 
@@ -42,7 +41,7 @@ components/
 data/portfolio-data.ts  # ⭐ 모든 콘텐츠 (단일 소스)
 lib/site.ts             # siteConfig, withBasePath, calcExperience
 lib/utils.ts            # cn
-scripts/                # generate-pdf.ts, gh-deploy.mjs
+scripts/                # generate-pdf.ts (Puppeteer PDF 생성)
 .claude/skills/impeccable/  # 디자인 스킬 + detector (아래 참고)
 ```
 
@@ -50,7 +49,7 @@ scripts/                # generate-pdf.ts, gh-deploy.mjs
 
 거의 모든 텍스트·프로젝트·이미지 참조는 **[data/portfolio-data.ts](data/portfolio-data.ts) 한 파일**에 있습니다. 고치면 **웹사이트는 즉시** 반영됩니다.
 
-> ⚠️ **PDF는 자동 반영되지 않습니다.** 이력서/포트폴리오 PDF(`public/*.pdf`)는 미리 생성된 정적 파일이라, 데이터를 바꾼 뒤 **`pnpm pdf`로 재생성**해야 다운로드에 반영됩니다. (`pnpm gh-deploy`는 빌드 전에 자동으로 재생성합니다.)
+> ⚠️ **PDF는 자동 반영되지 않습니다.** 이력서/포트폴리오 PDF(`public/*.pdf`)는 미리 생성된 정적 파일이라, 데이터를 바꾼 뒤 **`pnpm pdf`로 재생성**해야 다운로드에 반영됩니다.
 
 - 경력 기간(예: "2년 8개월")은 `personal.experienceSince`로 자동 계산(`lib/site.ts:calcExperience`).
 - 프로젝트 `images`(스크린샷 갤러리): 화면에서 클릭하면 라이트박스로 확대됩니다([components/project-gallery.tsx](components/project-gallery.tsx)). 프로젝트 로고 기능은 없습니다.
@@ -69,9 +68,9 @@ scripts/                # generate-pdf.ts, gh-deploy.mjs
 
 ## 배포
 
-- **자동**: `main` push → [.github/workflows/deploy.yml](.github/workflows/deploy.yml). 최초 1회 레포 Settings→Pages→Source를 "GitHub Actions"로.
-- **수동**: `pnpm gh-deploy`.
-- 레포명이 바뀌면 [next.config.mjs](next.config.mjs)의 `REPO_BASE_PATH`와 `lib/site.ts`의 repo, deploy 스크립트의 `GH_PAGES_REPO`를 함께 수정.
+`main` 에 push 하면 [.github/workflows/deploy.yml](.github/workflows/deploy.yml) 가 빌드 후 GitHub Pages 로 자동 배포합니다. Pages 소스는 **GitHub Actions**(`build_type: workflow`)로 설정되어 있습니다. 라이브: https://gangjoohyeong.github.io/portfolio/
+
+- 레포명이 바뀌면 [next.config.mjs](next.config.mjs)의 `REPO_BASE_PATH`와 [lib/site.ts](lib/site.ts)의 `repo`/`url`을 함께 수정.
 
 ## ⚠️ HeroUI v3 주의 (v2/NextUI와 API가 완전히 다름)
 

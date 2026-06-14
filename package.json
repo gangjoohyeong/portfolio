@@ -15,8 +15,7 @@
     "export:pdf": "tsx scripts/generate-pdf.ts",
     "export:pdf:resume": "tsx scripts/generate-pdf.ts --only=resume",
     "export:pdf:portfolio": "tsx scripts/generate-pdf.ts --only=portfolio",
-    "pdf": "concurrently --kill-others --success first --names \"dev,pdf\" \"next dev\" \"tsx scripts/generate-pdf.ts\"",
-    "gh-deploy": "pnpm pdf && next build && node scripts/gh-deploy.mjs"
+    "pdf": "concurrently --kill-others --success first --names \"dev,pdf\" \"next dev\" \"tsx scripts/generate-pdf.ts\""
   },
   "dependencies": {
     "@heroui/react": "^3.1.0",
