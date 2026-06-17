@@ -32,6 +32,14 @@
   --accent: oklch(0.575 0.16 42);
   --accent-foreground: oklch(0.99 0.01 80);
   --link: var(--foreground);
+
+  /* 폼 필드 — 배경(캔버스/카드)과 또렷이 구분되도록 별도 토큰으로 분리 */
+  --radius-field: 0.625rem;
+  --field-background: var(--surface);
+  --field-foreground: var(--foreground);
+  --field-placeholder: oklch(0.62 0.012 55);
+  --field-border: oklch(0.8 0.01 75);
+  --field-border-focus: var(--accent);
 }
 
 .dark,
@@ -51,6 +59,13 @@
   --accent: oklch(0.7 0.152 46);
   --accent-foreground: oklch(0.18 0.02 50);
   --link: var(--foreground);
+
+  /* 폼 필드 — 어두운 카드 위에서 살짝 밝은 면 + 또렷한 테두리 */
+  --field-background: oklch(0.265 0.012 55);
+  --field-foreground: var(--foreground);
+  --field-placeholder: oklch(0.6 0.014 60);
+  --field-border: oklch(0.42 0.014 55);
+  --field-border-focus: var(--accent);
 }
 
 /* -----------------------------------------------------------------------------
